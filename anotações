@@ -1,0 +1,41 @@
+Menu principal 
+4 opções
+
+1 - Criar lembrete
+2 - Visualizar Calendario
+3 - Analisar lembretes
+ 3.1 - A lista de lembretes por data.
+4 - sair 
+
+     Criar lembretes
+Data
+horaio
+Descrição
+
+   Visualizar o calendario
+1 -  Por semana   | 2 - por ano
+3 -    Por mes    | 4 - Voltar
+
+|----Semana----|
+| segunda     |
+--------------|
+| terça       |
+--------------|
+|    Quarta   |
+-------------|
+| Quinta
+--------
+| Sexta
+--------
+| Sabado
+--------
+
+
+Por ano
+
+De Hoje
+
+Mostra todos os compromissos.
+
+Até o mesmo dia no outro ano
+
