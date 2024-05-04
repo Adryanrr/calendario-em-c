@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+int opMenuPrincipal,opMenuCriar,opMenuVisualizar,opMenuAnalisar;
 
 void MenuPrincipal(){
     printf("+=================================================+\n");
@@ -10,7 +11,7 @@ void MenuPrincipal(){
     printf("+=================================================+\n");
     printf("| 3- Analisar Lembretes | 4- Sair                 |\n");
     printf("+=================================================+\n");
-
+    scanf("%d",&opMenuPrincipal);
 }
 void MenuCriar (){
     printf("+=================================================+\n");
@@ -18,6 +19,7 @@ void MenuCriar (){
     printf("+=================================================+\n");
     printf("| 3- Inserir Descrição  | 4- Menu Principal       |\n");
     printf("+=================================================+\n");
+    scanf("%d",&opMenuCriar);
 }
 void MenuVisualizar(){
     printf("+=================================================+\n");
@@ -25,6 +27,7 @@ void MenuVisualizar(){
     printf("+=================================================+\n");
     printf("| 3- Ano                 | 4- Menu Principal      |\n");
     printf("+=================================================+\n");
+    scanf("%d",&opMenuVisualizar);
 }
 void MenuAnalisar(){
     printf("+=================================================+\n");
@@ -32,4 +35,5 @@ void MenuAnalisar(){
     printf("+=================================================+\n");
     printf("| 3- Modificar Descrição | 4- Menu Principal      |\n");
     printf("+=================================================+\n");
+    scanf("%d",&opMenuAnalisar);
 }
