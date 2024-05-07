@@ -45,16 +45,30 @@ void MenuPrincipal(){
 }
 
 void MenuCriarLembrete(){
+    float dataLembrete, horaLembrete;
+    char descricaoLembrete[120];
+
     printf("+====================================================+\n");
-    printf("|    1 - Inserir Data    |     2 - Inserir Hora      |\n");
+    printf("|               Menu Criar Lembretes                 |\n");
     printf("+====================================================+\n");
-    printf("| 3 - Inserir Descrição  |    4 - Menu Principal     |\n");
+    printf("|       Inserir Data     |         Inserir Hora      |\n");
     printf("+====================================================+\n");
+    printf("|     Inserir Descrição  |        Menu Principal     |\n");
+    printf("+====================================================+\n");
+
+    printf("Insira a Data: \n");
+    scanf("%f", &dataLembrete);
+    printf("Insira a Hora: \n");
+    scanf("%f", &horaLembrete);
+    printf("Insira a Descrição do Lembrete: \n");
+    scanf("%s", &descricaoLembrete);
 }
 
 void MenuVisualizarLembretes(){
     int opMenuVisualizarLembretes;
 
+    printf("+========================================================+\n");
+    printf("|          Como você deseja visualizar os lembretes?     |\n");
     printf("+========================================================+\n");
     printf("|          1 - Semana          |         2 - Mês         |\n");
     printf("+========================================================+\n");
@@ -98,3 +112,4 @@ void VisualizarLembretesMes(){
 void VisualizarLembretesAno(){
     printf("A função Visualizar lembretes por ano está em criação \n");
 }
+
