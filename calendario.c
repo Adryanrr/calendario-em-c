@@ -25,7 +25,9 @@ void MenuPrincipal(){
     printf("+==================================================+\n");
     printf("| 1 - Criar Lembretes    | 2 - Visualizar Lembretes |\n");
     printf("+==================================================+\n");
-    printf("| 3 - Analisar Lembretes |        4 - Sair         |\n");
+    printf("| 3 - Analisar Lembretes |   4 - Calendario Icev   |\n");
+    printf("+==================================================+\n");
+    printf("|           0 - Para sair da Aplicação             |\n");
     printf("+==================================================+\n");
     printf("Digite Qual opção você deseja acessar: \n");
     scanf("%d", &opMenuPrincipal);
@@ -35,10 +37,13 @@ void MenuPrincipal(){
         MenuCriarLembrete();
         break;
     case 2:
-        MenuVisualizarLembretes();
+        VisualizarLembretesAno();
         break;
     case 3:
         MenuAnalisarLembretes();
+    case 4: 
+        CalendarioIcev();
+    default:
         MenuPrincipal();
         break;
     }
@@ -112,4 +117,22 @@ void VisualizarLembretesMes(){
 void VisualizarLembretesAno(){
     printf("A função Visualizar lembretes por ano está em criação \n");
 }
+void CalendarioIcev (){
 
+  printf("+=======|========================================================================+||\n");
+  printf("|HORARI0|    SEGUNDA    |    TERÇA    |    QUARTA    |    QUINTA     |  SEXTA     ||\n");
+  printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
+  printf("| 14:30 |               |             |              |               |            ||\n");
+  printf("| 16:10 |               |             |              |               |            ||\n");
+  printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
+  printf("| 16:20 |               |             |              |               |            ||\n");
+  printf("| 18:00 |               |             |              |               |            ||\n");
+  printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
+  printf("| 18:10 |               |             |              |               |            ||\n");
+  printf("| 20:00 |               |             |              |               |            ||\n");
+  printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
+  printf("| 20:10 |               |             |              |               |            ||\n");
+  printf("| 22:00 |               |             |              |               |            ||\n");
+  printf("+=======|+=======================================================================+||\n");
+                 
+}
