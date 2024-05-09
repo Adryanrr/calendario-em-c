@@ -3,11 +3,11 @@
 Este projeto é um calendário desenvolvido em linguagem C como parte do trabalho da disciplina de Lógica de Programação. O trabalho foi realizado por um grupo de quatro pessoas e tem como objetivo principal demonstrar habilidades de programação estruturada, manipulação de dados e lógica de programação.
 
 **Funcionalidades:**
-1. **Em construção** 
+1. **Criar lembretes** 
    
-2. **Em construção** 
+2. **Visualizar Lembretes** 
 
-3. **Em construção** 
+3. **Consultar Horario Da Faculdade** 
 
 **Como Executar:**
 1. Compile o código-fonte utilizando um compilador C compatível com seu sistema operacional.
