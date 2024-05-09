@@ -156,6 +156,8 @@ void VisualizarLembretesAno(){
     printf("A função Visualizar lembretes por ano está em criação \n");
 }
 void CalendarioIcev(){
+    int opCalendarioIcev;
+
     printf("+=======|========================================================================+||\n");
     printf("|HORARI0|    SEGUNDA    |    TERÇA    |    QUARTA    |    QUINTA     |  SEXTA     ||\n");
     printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
@@ -175,5 +177,18 @@ void CalendarioIcev(){
     printf("|       |               |             |              |               |            ||\n");
     printf("| 22:00 |               |             |              |               |            ||\n");
     printf("+=======|+=======================================================================+||\n");
+
+    printf("Digite 0 para voltar ao menu principal: \n");
+    scanf("%d", &opCalendarioIcev);
+
+    switch (opCalendarioIcev){
+    case 0:
+        limparTerminal();
+        MenuPrincipal();
+        break;  
+    default:
+        printf("opção invalida \n");
+        break;
+    }
 
 }
