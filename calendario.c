@@ -4,8 +4,10 @@
 #include <string.h>
 
 // Function prototypes
+void limparTerminal();
 void MenuPrincipal();
 void MenuCriarLembrete();
+void CalendarioIcev();
 // ------------------------------
 void MenuVisualizarLembretes();
 void VisualizarLembretesSemana();
@@ -19,11 +21,19 @@ int main(){
     return 0;
 }
 
+void limparTerminal() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+
+}
 void MenuPrincipal(){
     int opMenuPrincipal;
 
     printf("+==================================================+\n");
-    printf("| 1 - Criar Lembretes    | 2 - Visualizar Lembretes |\n");
+    printf("| 1 - Criar Lembretes    | 2 - Visualizar Lembretes \n");
     printf("+==================================================+\n");
     printf("| 3 - Analisar Lembretes |   4 - Calendario Icev   |\n");
     printf("+==================================================+\n");
@@ -34,16 +44,21 @@ void MenuPrincipal(){
 
     switch (opMenuPrincipal){
     case 1:
+        limparTerminal();
         MenuCriarLembrete();
         break;
     case 2:
+        limparTerminal();
         VisualizarLembretesAno();
         break;
     case 3:
+        limparTerminal();
         MenuAnalisarLembretes();
     case 4: 
+        limparTerminal();
         CalendarioIcev();
     default:
+        limparTerminal();
         MenuPrincipal();
         break;
     }
@@ -84,15 +99,19 @@ void MenuVisualizarLembretes(){
     
     switch (opMenuVisualizarLembretes){
     case 1:
+        limparTerminal();
         VisualizarLembretesSemana();
         break;
     case 2:
+        limparTerminal();
         VisualizarLembretesMes();
         break;
     case 3:
+        limparTerminal();
         VisualizarLembretesAno();
         break;
     default:
+        limparTerminal();
         MenuPrincipal();
         break;
     }
@@ -136,26 +155,25 @@ void VisualizarLembretesMes(){
 void VisualizarLembretesAno(){
     printf("A função Visualizar lembretes por ano está em criação \n");
 }
-void CalendarioIcev (){
+void CalendarioIcev(){
+    printf("+=======|========================================================================+||\n");
+    printf("|HORARI0|    SEGUNDA    |    TERÇA    |    QUARTA    |    QUINTA     |  SEXTA     ||\n");
+    printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
+    printf("| 14:30 |               |             |              |               |            ||\n");
+    printf("|       |               |             |              |               |            ||\n");
+    printf("| 16:10 |               |             |              |               |            ||\n");
+    printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
+    printf("| 16:20 |               |             |              |               |            ||\n");
+    printf("|       |               |             |              |               |            ||\n");
+    printf("| 18:00 |               |             |              |               |            ||\n");
+    printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
+    printf("| 18:10 |               |             |              |               |            ||\n");
+    printf("|       |               |             |              |               |            ||\n");
+    printf("| 20:00 |               |             |              |               |            ||\n");
+    printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
+    printf("| 20:10 |               |             |              |               |            ||\n");
+    printf("|       |               |             |              |               |            ||\n");
+    printf("| 22:00 |               |             |              |               |            ||\n");
+    printf("+=======|+=======================================================================+||\n");
 
-  printf("+=======|========================================================================+||\n");
-  printf("|HORARI0|    SEGUNDA    |    TERÇA    |    QUARTA    |    QUINTA     |  SEXTA     ||\n");
-  printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
-  printf("| 14:30 |               |             |              |               |            ||\n");
-  printf("|       |               |             |              |               |            ||\n");
-  printf("| 16:10 |               |             |              |               |            ||\n");
-  printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
-  printf("| 16:20 |               |             |              |               |            ||\n");
-  printf("|       |               |             |              |               |            ||\n");
-  printf("| 18:00 |               |             |              |               |            ||\n");
-  printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
-  printf("| 18:10 |               |             |              |               |            ||\n");
-  printf("|       |               |             |              |               |            ||\n");
-  printf("| 20:00 |               |             |              |               |            ||\n");
-  printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
-  printf("| 20:10 |               |             |              |               |            ||\n");
-  printf("|       |               |             |              |               |            ||\n");
-  printf("| 22:00 |               |             |              |               |            ||\n");
-  printf("+=======|+=======================================================================+||\n");
-                 
 }
