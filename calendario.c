@@ -7,7 +7,7 @@
 void limparTerminal();
 void MenuPrincipal();
 void MenuCriarLembrete();
-void CalendarioIcev();
+void calendarioIcev();
 // ------------------------------
 void MenuVisualizarLembretes();
 void VisualizarLembretesSemana();
@@ -17,6 +17,7 @@ void VisualizarLembretesAno();
 void MenuAnalisarLembretes();
 
 int main(){
+    limparTerminal();
     MenuPrincipal(); 
     return 0;
 }
@@ -33,7 +34,7 @@ void MenuPrincipal(){
     int opMenuPrincipal;
 
     printf("+==================================================+\n");
-    printf("| 1 - Criar Lembretes    | 2 - Visualizar Lembretes \n");
+    printf("| 1 - Criar Lembretes    | 2 - Visualizar Lembretes|\n");
     printf("+==================================================+\n");
     printf("| 3 - Analisar Lembretes |   4 - Calendario Icev   |\n");
     printf("+==================================================+\n");
@@ -56,10 +57,10 @@ void MenuPrincipal(){
         MenuAnalisarLembretes();
     case 4: 
         limparTerminal();
-        CalendarioIcev();
+        calendarioIcev();
     default:
         limparTerminal();
-        MenuPrincipal();
+        printf("Obrigado, volte sempre! \n");
         break;
     }
 }
@@ -110,9 +111,12 @@ void MenuVisualizarLembretes(){
         limparTerminal();
         VisualizarLembretesAno();
         break;
-    default:
+    case 4:
         limparTerminal();
         MenuPrincipal();
+    default:
+        limparTerminal();
+        printf("Operação invalidda \n");
         break;
     }
 }
@@ -125,6 +129,7 @@ void MenuAnalisarLembretes(){
     printf("+=================================================+\n");
     printf("| 3- Modificar Descrição |    4- Menu Principal   |\n");
     printf("+=================================================+\n");
+    printf("Digite Qual opção você deseja acessar: \n");
     scanf("%d", &opMenuAnalisar);
 }
 
@@ -155,28 +160,28 @@ void VisualizarLembretesMes(){
 void VisualizarLembretesAno(){
     printf("A função Visualizar lembretes por ano está em criação \n");
 }
-void CalendarioIcev(){
+void calendarioIcev(){
     int opCalendarioIcev;
 
-    printf("+=======|========================================================================+||\n");
-    printf("|HORARI0|    SEGUNDA    |    TERÇA    |    QUARTA    |    QUINTA     |  SEXTA     ||\n");
-    printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
-    printf("| 14:30 |               |             |              |               |            ||\n");
-    printf("|       |               |             |              |               |            ||\n");
-    printf("| 16:10 |               |             |              |               |            ||\n");
-    printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
-    printf("| 16:20 |               |             |              |               |            ||\n");
-    printf("|       |               |             |              |               |            ||\n");
-    printf("| 18:00 |               |             |              |               |            ||\n");
-    printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
-    printf("| 18:10 |               |             |              |               |            ||\n");
-    printf("|       |               |             |              |               |            ||\n");
-    printf("| 20:00 |               |             |              |               |            ||\n");
-    printf("|-------|---------------|-------------|--------------|---------------|------------||\n");
-    printf("| 20:10 |               |             |              |               |            ||\n");
-    printf("|       |               |             |              |               |            ||\n");
-    printf("| 22:00 |               |             |              |               |            ||\n");
-    printf("+=======|+=======================================================================+||\n");
+    printf("+=======|=========================================================================================+||\n");
+    printf("|HORARI0|    SEGUNDA    |    TERÇA    |    QUARTA    |    QUINTA     |    SEXTA   |    SABADO      ||\n");
+    printf("|-------|---------------|-------------|--------------|---------------|-----------------------------||\n");
+    printf("| 14:30 |  Arquiterura  |  Matematica | Arquiterura  |  Algoritimo   | Algoritimo |                ||\n");
+    printf("|       |       de      |   Discreta  |     de       |       e       |      e     |                ||\n");
+    printf("| 16:10 |  computadores |             | computadores |  Programação  | Programação|                ||\n");
+    printf("|-------|---------------|-------------|--------------|---------------|------------|----------------||\n");
+    printf("| 16:20 |               |  Engenharia |  Matematica  |   Engenharia  |  Projeto   |                ||\n");
+    printf("|       | Seminarios I  |      de     |   Discreta   |       de      |     de     |                ||\n");
+    printf("| 18:00 |               |   Software  |              |    Software   | Extensão I |                ||\n");
+    printf("|-------|---------------|-------------|--------------|---------------|------------|----------------||\n");
+    printf("| 18:10 |               |             |              |               |            |                ||\n");
+    printf("|       |               |             |              |               |  Ingles I  |                ||\n");
+    printf("| 20:00 |               |             |              |               |            |                ||\n");
+    printf("|-------|---------------|-------------|--------------|---------------|------------|----------------||\n");
+    printf("| 20:10 |               |             |              |               |            |                ||\n");
+    printf("|       |               |             |              |               |            |                ||\n");
+    printf("| 22:00 |               |             |              |               |            |                ||\n");
+    printf("+=======|+========================================================================================+||\n");
 
     printf("Digite 0 para voltar ao menu principal: \n");
     scanf("%d", &opCalendarioIcev);
