@@ -61,11 +61,26 @@ void MenuPrincipal(){
     }
 }
 void VisualizarCalendario(){
+    int opVisualizarCalendario;
+    
     printf("+==================================================================+\n");
     printf("|    [1] - Visualizar outro Mês         [2] - Criar um lembrete    |\n");
     printf("+==================================================================+\n");
     printf("|                             0 - Exit                             |\n");
     printf("+==================================================================+\n");
+    switch (opVisualizarCalendario){
+    case 1:
+        limparTerminal();
+        TrocaMes();
+        break;
+    case 2:
+        limparTerminal();
+        CriarLembretes();
+    default:
+        limparTerminal();
+        printf("Obrigado, volte sempre! \n");
+        break;
+    }
 }
 void visualizarLembretes(){
   printf("Em construção!!");
@@ -100,4 +115,11 @@ void calendarioIcev(){
         printf("opção invalida! \n");
         break;
     }
+}
+void CriarLembretes(){
+    char horaLembrete,descricaoLembrete[50];
+    printf("Insira a Hora: XX:XX \n");
+    scanf("%s", &horaLembrete);
+    printf("Insira a Descrição do Lembrete: \n");
+    scanf("%s", &descricaoLembrete);
 }
