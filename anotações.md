@@ -1,41 +1,57 @@
 ## Menu Principal
 
-- **1** - Criar lembrete
+- **1** - Calendario
 - **2** - Visualizar Calendário
-- **3** - Analisar lembretes
-  - **3.1** - Lista de lembretes por data
+- **3** - Semana Letiva
 - **4** - Sair
 
 ---
 
-### Criar lembretes
+### Calendario
 
+Exir o calendario do Mês atual:
+
+Opções:
+Deseja visualizar um outro Mês?
+[1] - Sim
+[2] - Criar um lembrete
+[0] - Voltar ao menu principal
+
+[1] Visualizar lembrete:
+Escolha o Mês que deseja visualizarde 1-12:
+Ano 20__
+
+## Opção de cadastrar o lembrete:
+Escolha a data:
 - Data
+Escolha a Hora:
 - Horário
+Descrição do lembrete:
 - Descrição
 
----
+#### V. Lembretes
 
-### Visualizar o calendário
+## Visualizar por lista:
+data
+hora
+descrição
+EX:
+DATA: 25/05/2024
+HORA: 18:00
+DESCRIÇÃO: Anivesario.
 
-1. Por semana
-2. Por ano
-3. Por mês
-4. Voltar
+#### Visualizar por Ano:
 
-#### Por Semana
+Impresso em formato de lista:
+Mês 1:
+3 Compromissos.
+Mês 2:
+1 Compromisso.
+Mês 3:
+5 Compromissos.
+...
 
-| Semana    |
-| ---------|
-| Segunda  |
-| Terça    |
-| Quarta   |
-| Quinta   |
-| Sexta    |
-| Sábado   |
-
-#### Por Ano
-
-- De hoje: Mostra todos os compromissos.
-- Até o mesmo dia no outro ano
-
+Escolha o Mês (1-12):
+[1] - CAL
+[2] - LEMBRETES EM LISTA
+[0] - EXIT
