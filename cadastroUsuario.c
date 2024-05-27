@@ -4,6 +4,7 @@
 #include <string.h>
 
 void MenuPrincipal();
+
 // void cadastrarUsuario(struct usuario usuarios[], int *contagem);  
 // void listarUsuarios(int *contagem, struct usuario usuarios[]);
 
@@ -15,7 +16,8 @@ void MenuPrincipal();
 // #else
 //     system("clear");
 // #endif
-//}
+//}\
+
 struct usuario{
   char nomeUsuario[50];
   char senha[50];
