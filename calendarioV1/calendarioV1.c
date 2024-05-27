@@ -39,7 +39,7 @@ void MenuPrincipal(){
     printf("+==================================================+\n");
     printf("| 3 - Analisar Lembretes |   4 - Calendario Icev   |\n");
     printf("+==================================================+\n");
-    printf("|           0 - Para sair da Aplica��o             |\n");
+    printf("|           0 - Para sair da Aplicação             |\n");
     printf("+==================================================+\n");
     printf("Digite Qual opção você deseja acessar: \n");
     scanf("%d", &opMenuPrincipal);
@@ -75,14 +75,14 @@ void MenuCriarLembrete(){
     //printf("+====================================================+\n");
     //printf("|       Inserir Data     |         Inserir Hora      |\n");
     //printf("+====================================================+\n");
-    //printf("|     Inserir Descri��o  |        Menu Principal     |\n");
+    //printf("|     Inserir Descrição  |        Menu Principal     |\n");
     //printf("+====================================================+\n");
 
     printf("Insira a Data: \n");
     scanf("%f", &dataLembrete);
     printf("Insira a Hora: \n");
     scanf("%f", &horaLembrete);
-    printf("Insira a Descri��o do Lembrete: \n");
+    printf("Insira a Descrição do Lembrete: \n");
     scanf("%s", &descricaoLembrete);
 }
 
@@ -90,13 +90,13 @@ void MenuVisualizarLembretes(){
     int opMenuVisualizarLembretes;
 
     printf("+========================================================+\n");
-    printf("|          Como voc� deseja visualizar os lembretes?     |\n");
+    printf("|          Como vocçã deseja visualizar os lembretes?     |\n");
     printf("+========================================================+\n");
-    printf("|          1 - Semana          |         2 - M�s         |\n");
+    printf("|          1 - Semana          |         2 - Mês         |\n");
     printf("+========================================================+\n");
     printf("|           3 - Ano            |    4 - Menu Principal   |\n");
     printf("+========================================================+\n");
-    printf("Digite Qual op��o voc� deseja acessar: \n");
+    printf("Digite Qual opção você deseja acessar: \n");
     scanf("%d", &opMenuVisualizarLembretes);
     
     switch (opMenuVisualizarLembretes){
@@ -117,7 +117,7 @@ void MenuVisualizarLembretes(){
         MenuPrincipal();
     default:
         limparTerminal();
-        printf("Opera��o invalida \n");
+        printf("Operação invalida \n");
         break;
     }
 }
@@ -128,42 +128,50 @@ void MenuAnalisarLembretes(){
     printf("+=================================================+\n");
     printf("|    1- Modificar Data   |   2- Modificar Hora    |\n");
     printf("+=================================================+\n");
-    printf("| 3- Modificar Descri��o |    4- Menu Principal   |\n");
+    printf("| 3- Modificar Descrição |    4- Menu Principal   |\n");
     printf("+=================================================+\n");
-    printf("Digite Qual op��o voc� deseja acessar: \n");
+    printf("Digite Qual opção você deseja acessar: \n");
     scanf("%d", &opMenuAnalisar);
 }
 
 void VisualizarLembretesSemana(){
-    printf("+=======|========================================================================================================+|\n");
-    printf("|HORARI0|    SEGUNDA    |    TER�A    |    QUARTA    |    QUINTA     |    SEXTA    |    SABADO    |    DOMINGO    |\n");
-    printf("|-------|---------------|-------------|--------------|---------------|-------------|--------------|---------------|\n");
-    for (int i = 0; i < 4; i++){
-    printf("| 00:00 |               |             |              |               |             |              |               |\n");
-    printf("+=======|+======================================================================================================+||\n");
-    }
-
+  printf("+=======|========================================================================================================+|\n");
+  printf("|HORARI0|    SEGUNDA    |    TER�A    |    QUARTA    |    QUINTA     |    SEXTA    |    SABADO    |    DOMINGO    |\n");
+  printf("|-------|---------------|-------------|--------------|---------------|-------------|--------------|---------------|\n");
+  printf("| 00:00 |               |             |              |               |             |              |               |\n");
+  printf("|       |               |             |              |               |             |              |               |\n");
+  printf("| 00:00 |               |                     |              |               |             |              |               |\n");
+  printf("|       |               |             |              |               |             |              |               |\n");
+  printf("| 00:00 |               |             |              |               |             |              |               |\n");
+  printf("|-------|---------------|-------------|--------------|---------------|-------------|--------------|---------------|\n");
+  printf("| 00:00 |               |             |              |               |             |              |               |\n");
+  printf("|       |               |             |              |               |             |              |               |\n");
+  printf("| 00:00 |               |             |              |               |             |              |               |\n");
+  printf("|-------|---------------|-------------|--------------|---------------|-------------|--------------|---------------|\n");
+  printf("| 00:00 |               |             |              |               |             |              |               |\n");
+  printf("|       |               |             |              |               |             |              |               |\n");
+  printf("| 00:00 |               |             |              |               |             |              |               |\n");
+  printf("+=======|+======================================================================================================+||\n");
 }
-
 void VisualizarLembretesMes(){
-    printf("A fun��o Visualizar lembretes por semana est� em cria��o \n");
+    printf("A função Visualizar lembretes por semana está em criação \n");
 }
 void VisualizarLembretesAno(){
-    printf("A fun��o Visualizar lembretes por ano est� em cria��o \n");
+    printf("A função Visualizar lembretes por ano está em criação \n");
 }
 void calendarioIcev(){
     int opCalendarioIcev;
 
     printf("+=======|=========================================================================================+||\n");
-    printf("|HORARI0|    SEGUNDA    |    TER�A    |    QUARTA    |    QUINTA     |    SEXTA   |    SABADO      ||\n");
+    printf("|HORARI0|    SEGUNDA    |    TERÇA    |    QUARTA    |    QUINTA     |    SEXTA   |    SABADO      ||\n");
     printf("|-------|---------------|-------------|--------------|---------------|-----------------------------||\n");
     printf("| 14:30 |  Arquiterura  |  Matematica | Arquiterura  |  Algoritimo   | Algoritimo |                ||\n");
     printf("|       |       de      |   Discreta  |     de       |       e       |      e     |                ||\n");
-    printf("| 16:10 |  computadores |             | computadores |  Programa��o  | Programa��o|                ||\n");
+    printf("| 16:10 |  computadores |             | computadores |  Programação  | Programação|                ||\n");
     printf("|-------|---------------|-------------|--------------|---------------|------------|----------------||\n");
     printf("| 16:20 |               |  Engenharia |  Matematica  |   Engenharia  |  Projeto   |                ||\n");
     printf("|       | Seminarios I  |      de     |   Discreta   |       de      |     de     |                ||\n");
-    printf("| 18:00 |               |   Software  |              |    Software   | Extens�o I |                ||\n");
+    printf("| 18:00 |               |   Software  |              |    Software   | Extensão I |                ||\n");
     printf("|-------|---------------|-------------|--------------|---------------|------------|----------------||\n");
     printf("| 18:10 |               |             |              |               |            |                ||\n");
     printf("|       |   Ingles I    |             |              |               |            |                ||\n");
@@ -183,7 +191,7 @@ void calendarioIcev(){
         MenuPrincipal();
         break;  
     default:
-        printf("op��o invalida \n");
+        printf("opção invalida \n");
         break;
     }
 }
