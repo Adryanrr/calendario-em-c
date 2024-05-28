@@ -53,7 +53,7 @@ Digite Qual opção você deseja acessar:
 - O programa está preparado para ser expandido com novas funcionalidades conforme necessário.
 
 ## Desenvolvedores
-@adryanrr
-@whuanderson.marinho
-@matheusJuca
-@andre.texeira
+[Adryan Ryan](https://github.com/Adryanrr)
+[Whuanderson Marinho](https://github.com/Whuanderson/whuanderson)
+[Matheus Juca](https://github.com/MatheusJuK)
+[Andre Texeira](https://github.com/AndreNTeixeira)
