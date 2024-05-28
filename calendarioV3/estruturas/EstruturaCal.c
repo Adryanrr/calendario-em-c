@@ -5,7 +5,7 @@
 #include<string.h>
 
 typedef struct {
-    int hour; //entrada de hora do usuário para o evento
+    int hora; //entrada de hora do usuário para o evento
     int min; //entrada de minuto do usuário
     char name[100]; //nome do evento
 }event;
@@ -15,7 +15,7 @@ bool check (const event *e){
 } //verificar se o evento é NULL
 event *UIEvent(){
     event *e = (event*) malloc(sizeof(event));
-    e->hour=0;
+    e->hora=0;
     e->min=0;
     strcpy(e->name,"");
     return e;
@@ -53,7 +53,7 @@ event *NewEvent(event *e){
     printf("\n \n  Novo  Evento  Selecionado  \n \n");
     system("setterm -bold off");
     printf("Digite a hora (0-23): ");
-    e->hour=range1(0,23);
+    e->hora=range1(0,23);
     printf("Digite o minuto (0-59): ");
     e->min=range2(0,59);
     puts("\n     NOME DO EVENTO     \n");
@@ -70,7 +70,7 @@ void AddEvent(event list[],const event e, const int x){
 	if(check(&e)){
 return;
     }
-    list[x].hour=e.hour;
+    list[x].hora=e.hora;
     list[x].min=e.min;
     strcpy(list[x].name,e.name);
 }//adicionando eventos a uma lista
@@ -79,17 +79,17 @@ void sort (event list[],const int size){
     int x,y,storeh2,storem2;//store h para hora, m para min, 1 e 2, dependem de arr
     char name2[100];
     for (x=1;x<size;x++){
-        for(y=x;y>0&&(list[y-1].hour>list[y].hour)||
-                (list[y-1].hour==list[y].hour)&&(list[y-1].min>list[y].min);y--){
-            storeh2=list[y-1].hour;
+        for(y=x;y>0&&(list[y-1].hora>list[y].hora)||
+                (list[y-1].hora==list[y].hora)&&(list[y-1].min>list[y].min);y--){
+            storeh2=list[y-1].hora;
             storem2=list[y-1].min;
             strcpy(name2,list[y-1].name);
             //evento 2 ^
-            list[y-1].hour=list[y].hour;
+            list[y-1].hora=list[y].hora;
             list[y-1].min=list[y].min;
             strcpy(list[y-1].name,list[y].name);
             //trocar os dois usando o armazenamento temporário
-            list[y].hour=storeh2;
+            list[y].hora=storeh2;
             list[y].min=storem2;
             strcpy(list[y].name,name2);
         }
@@ -101,11 +101,11 @@ void CorrectSort (event list[], int *size, event e){
     sort(list,*size);
 }
 void printEvent(const event e){ //<---printevent sourced by: stackexchange.com
-  char hour1 = {(e.hour/10)+ '0'};//primeiro dígito
-	char hour2 = {(e.hour-(e.hour/10)*10)+'0'};
+  char hora1 = {(e.hora/10)+ '0'};//primeiro dígito
+	char hora2 = {(e.hora-(e.hora/10)*10)+'0'};
 	char min1 = {(e.min/10)+'0'};
 	char min2 = {(e.min-(e.min/10)*10)+'0'};
-	printf("%c%c:%c%c  ~%s\n",hour1,hour2,min1,min2,e.name);
+	printf("%c%c:%c%c  ~%s\n",hora1,hora2,min1,min2,e.name);
 }
 void printList(const event list[],const int size){
     if(size==0){
@@ -140,7 +140,7 @@ void deleteEvent(event list[],int *size){
       printf(" \n Nenhum evento encontrado \n");
       return;
   }
-  list[locate].hour=70; //marcar o evento para exclusão
+  list[locate].hora=70; //marcar o evento para exclusão
   list[locate].min=70;
   strcpy(list[locate].name,"");
   sort(list,*size);
@@ -160,11 +160,11 @@ int main () {
       "Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro",
       "Outubro","Novembro","Dezembro"
   };
-  int year, month, day,leap=0,x, day2;
+  int year, mes, dia,leap=0,x, day2;
   int count=0;
   char temp[100];
   signed char c; //entrada do usuário para mudança de calendário
-  int MonthArray[12]={31,28,31,30,31,30,31,31,30,31,30,31};
+  int mesArray[12]={31,28,31,30,31,30,31,31,30,31,30,31};
   system("setterm -bold on"); //cabeçalho em negrito
   printf("Calendário de Eventos \n");
   system("setterm -bold off");
@@ -175,30 +175,30 @@ label1:printf("Digite o ano: ");
           goto label1; //label 1 para entrada de ano incorreta
        }
 label2:printf("Digite o mês: ");
-      scanf("%d", &month); //entrada do usuário para o mês
-      if(!(month<13) || !(month>0)){
+      scanf("%d", &mes); //entrada do usuário para o mês
+      if(!(mes<13) || !(mes>0)){
           printf("Mês não adequado. \n");
           goto label2; //label 2 para entrada de mês incorreta
       }
 label3:printf("Digite o dia: ");
-      scanf("%d", &day); //entrada do usuário para o dia
-      if (day<1||day>31){
+      scanf("%d", &dia); //entrada do usuário para o dia
+      if (dia<1||dia>31){
           printf("Dia não adequado. \n");
           goto label3;
-      }else if(month==4||month==6||month==9||month==11){ //entrada incorreta para 30 dias
-          if (day>30){
+      }else if(mes==4||mes==6||mes==9||mes==11){ //entrada incorreta para 30 dias
+          if (dia>30){
               printf("Dia não adequado. \n");
               goto label3;
           }
-      }else if (month==2){ //entrada incorreta para fevereiro
+      }else if (mes==2){ //entrada incorreta para fevereiro
           if ((year%4)==0&&(year%100!=0)||(year%400==0)){ //possibilidade de ano bissexto
-              MonthArray[1]=29;
-              if(day>29){ //29 dias
+              mesArray[1]=29;
+              if(dia>29){ //29 dias
                   printf("Dia não adequado. \n");
                   goto label3;
               }
           }else{
-              if(day>28){ //28 dias
+              if(dia>28){ //28 dias
                   printf("Dia não adequado. \n");
                   goto label3;
               }
@@ -208,31 +208,31 @@ label3:printf("Digite o dia: ");
       int DetermineDay;
 label4:system("clear");
        x=1;
-       DetermineDay=(x+=month<3?year:year-2,23*month/9+x+4+year/4-year/100+year/400)%7;
+       DetermineDay=(x+=mes<3?year:year-2,23*mes/9+x+4+year/4-year/100+year/400)%7;
        if((year%4)==0&&(year%100!=0)||(year%400==0)){
-	       MonthArray[1]=29;
-	       if(month==1||month==2){
+	       mesArray[1]=29;
+	       if(mes==1||mes==2){
 		       DetermineDay--;
 		       if (DetermineDay<0){
 			       DetermineDay=6;
 		       }
 	       }
        }else{
-	       MonthArray[1]=28;
+	       mesArray[1]=28;
        }
       //Fonte da linha acima: cadaeit.net
       system("setterm -bold on"); //cabeçalho em negrito
-      printf("\n         %s    %d \n", MonthDisplay[month-1],year); //cabeçalho
+      printf("\n         %s    %d \n", MonthDisplay[mes-1],year); //cabeçalho
       printf("\nDOM  SEG  TER  QUA  QUI  SEX  SAB\n");
       system("setterm -bold off");
       for(day2=1;day2<=DetermineDay;day2++){ //day2 é o contador
           printf("     ");
       } //inicializa a posição do primeiro dia
       printf(" ");
-      for (day2=1;day2<=MonthArray[month-1];day2 = day2 + 1){
+      for (day2=1;day2<=mesArray[mes-1];day2 = day2 + 1){
           //preenche o calendário
-          if(day==day2){ //torna a saída vermelha
-              printf("\e[5;31;40m%2d\e[0m",day); //não pisca
+          if(dia==day2){ //torna a saída vermelha
+              printf("\e[5;31;40m%2d\e[0m",dia); //não pisca
           }else{
               printf("%2d",day2);
           }
@@ -245,7 +245,7 @@ label4:system("clear");
       //tentativa de negrito no dia de entrada do usuário
       printf("\n\n");
       //exibe o dia:
-label5:printf("Você selecionou %s %d, %d \n",MonthDisplay[month-1],day,year);
+label5:printf("Você selecionou %s %d, %d \n",MonthDisplay[mes-1],dia,year);
       //exibe eventos
       //carrega do arquivo de saída :(
       printList(list,count);
@@ -273,40 +273,40 @@ while(c!=3){
             system("setterm -bold off");
             break;
         }else if(c=='w'){ //mês anterior
-            if(month==1){
+            if(mes==1){
                 year--;
-                month=12;
+                mes=12;
             }else{
-                month--;
+                mes--;
             }
-            if(day>MonthArray[month-1]){
-                day=MonthArray[month-1];
+            if(dia>mesArray[mes-1]){
+                dia=mesArray[mes-1];
             }
             goto label4;
         }else if(c=='s'){ //próximo mês
-            if(month==12){
-                month=1;
+            if(mes==12){
+                mes=1;
                 year++;
             }else{
-                month++;
+                mes++;
             }
-            if(day>MonthArray[month-1]){
-			       day=MonthArray[month-1];
+            if(dia>mesArray[mes-1]){
+			       dia=mesArray[mes-1];
 		       }
 		       goto label4;
         }else if(c=='a'){ //dia anterior
-            if(day==1){
-                month--;
-                day=MonthArray[month-1];
+            if(dia==1){
+                mes--;
+                dia=mesArray[mes-1];
             }else{
-                day--;
+                dia--;
             }goto label4;
         }else if(c=='d'){ //próximo dia
-            if (day==MonthArray[month-1]){
-                day=1;
-                month++;
+            if (dia==mesArray[mes-1]){
+                dia=1;
+                mes++;
             }else{
-                day++;
+                dia++;
             }
             goto label4;
         }else{
