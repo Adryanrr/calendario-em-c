@@ -53,7 +53,12 @@ Digite Qual opção você deseja acessar:
 - O programa está preparado para ser expandido com novas funcionalidades conforme necessário.
 
 ## Desenvolvedores
-[Adryan Ryan](https://github.com/Adryanrr)
-[Whuanderson Marinho](https://github.com/Whuanderson/whuanderson)
-[Matheus Juca](https://github.com/MatheusJuK)
-[Andre Texeira](https://github.com/AndreNTeixeira)
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Adryanrr"><img src="https://github.com/Adryanrr.png" width="100px;" alt="Foto do Adryan Ryan"/><br /><sub><b>Adryan Ryan</b></sub></a></td>
+    <td align="center"><a href="https://github.com/Whuanderson/whuanderson"><img src="https://github.com/Whuanderson/whuanderson.png" width="100px;" alt="Foto do Whuanderson Marinho"/><br /><sub><b>Whuanderson Marinho</b></sub></a></td>
+    <td align="center"><a href="https://github.com/MatheusJuK"><img src="https://github.com/MatheusJuK.png" width="100px;" alt="Foto do Matheus Juca"/><br /><sub><b>Matheus Juca</b></sub></a></td>
+    <td align="center"><a href="https://github.com/AndreNTeixeira"><img src="https://github.com/AndreNTeixeira.png" width="100px;" alt="Foto do Andre Texeira"/><br /><sub><b>Andre Texeira</b></sub></a></td>
+  </tr>
+</table>
