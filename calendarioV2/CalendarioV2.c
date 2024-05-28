@@ -15,6 +15,8 @@ void VisualizarLembretesAno();
 // ------------------------------
 void calendarioIcev();
 // ------------------------------
+void CriarLembretes();
+void TrocaMes();
 
 int main(){
     limparTerminal();
@@ -122,4 +124,7 @@ void CriarLembretes(){
     scanf("%s", &horaLembrete);
     printf("Insira a Descrição do Lembrete: \n");
     scanf("%s", &descricaoLembrete);
+}
+void TrocaMes(){
+ printf("Em construção!!");
 }
