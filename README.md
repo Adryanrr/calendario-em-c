@@ -46,6 +46,7 @@ Digite Qual opção você deseja acessar:
 - **3 - Calendário Acadêmico**: Mostra a grade horária do calendário acadêmico.
 - **4 - Sair**: Encerra o programa.
 
+
 ## Observações
 
 - Algumas funções estão marcadas como "Em construção" e serão desenvolvidas futuramente.
