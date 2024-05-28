@@ -46,36 +46,6 @@ Digite Qual opção você deseja acessar:
 - **3 - Calendário Acadêmico**: Mostra a grade horária do calendário acadêmico.
 - **4 - Sair**: Encerra o programa.
 
-## Estrutura das Funções
-
-### `limparTerminal()`
-
-Limpa a tela do terminal, funcionando tanto para Windows quanto para sistemas Unix-like.
-
-### `MenuPrincipal()`
-
-Exibe o menu principal e direciona o usuário para a funcionalidade escolhida.
-
-### `VisualizarCalendario()`
-
-Permite ao usuário visualizar outro mês ou criar um lembrete.
-
-### `visualizarLembretes()`
-
-Função em construção que futuramente permitirá visualizar lembretes.
-
-### `calendarioIcev()`
-
-Exibe o calendário acadêmico com horários de aulas e outras atividades.
-
-### `CriarLembretes()`
-
-Permite ao usuário criar novos lembretes, solicitando hora e descrição.
-
-### `TrocaMes()`
-
-Função em construção para permitir a troca de mês no calendário.
-
 ## Observações
 
 - Algumas funções estão marcadas como "Em construção" e serão desenvolvidas futuramente.
