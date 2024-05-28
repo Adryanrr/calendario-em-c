@@ -18,8 +18,10 @@ void calendarioIcev();
 void CriarLembretes();
 void TrocaMes();
 
+
 int main(){
     limparTerminal();
+    AbrirArquivo();
     MenuPrincipal(); 
     return 0;
 }
@@ -126,5 +128,10 @@ void CriarLembretes(){
     scanf("%s", &descricaoLembrete);
 }
 void TrocaMes(){
- printf("Em construção!!");
+    printf("Em construção!!");
+}
+void AbrirArquivo(){
+    FILE * arquivo;
+    arquivo = fopen("C:\\Windows\\Temp\\teste.txt","w+");
+    fprintf(arquivo,"teste");
 }
