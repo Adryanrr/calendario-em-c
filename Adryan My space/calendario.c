@@ -6,7 +6,7 @@
 #include<string.h>
 #include<locale.h>
 #include <stdbool.h>
-#include <time.h>
+#include <Windows.h>
 #include <unistd.h>
 
 typedef struct {
