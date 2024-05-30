@@ -309,7 +309,7 @@ void calendario() {
 
         if (c == '1') {
             // Chamar função para criar evento
-            printf("Função de criar evento não implementada.\n");
+            criarLembretes();
             GerarCalendario();
             menuCalendario();
         } else if (c == '2') {
