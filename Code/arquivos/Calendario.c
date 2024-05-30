@@ -9,11 +9,16 @@
 #include <stdbool.h>
 #include <stdbool.h>
 
-typedef struct {
-    int hora;
-    int min;
+#define MAXIMO_LEMBRETES 10
+
+struct lembrete{
     char nome[100];
-}lembrete;
+    int ano;
+    int mes;       
+    int dia;          
+};
+struct lembrete lembretes[MAXIMO_LEMBRETES];
+
 
 // Funções de interface do usuário
 void limparTerminal();
@@ -39,6 +44,7 @@ void obterDigitos(int num, char* primeiroDigito, char* segundoDigito);
 void visualizarLembretes();
 void calendarioIcev();
 void calendario();
+void criarLembretes();
 void menuCalendario();
 
 int main(){
@@ -89,15 +95,15 @@ void menuPrincipal(){
         break;
     case 2:
         limparTerminal();
-        printf("Criar Lembrete \n");
+        criarLembretes();
         break;
     case 3:
         limparTerminal();
-        printf("Visualizar Evento \n");
+        visualizarLembretes();
         break;
     case 4: 
-          limparTerminal();
-        printf("Calendario Academico \n");
+        limparTerminal();
+        calendarioIcev();
     case 0:
         limparTerminal();
         printf("Obrigado, volte sempre! \n");
@@ -112,7 +118,54 @@ void menuPrincipal(){
 // Inicio da gestão de lembretes
 
 
-void criarLembretes() {
+void criarLembretes(){
+    struct lembrete lembretes[100];
+    printf("Digite o nome do lembrete: \n");
+    scanf("%s", lembretes[0].nome);
+    printf("Digite o ano do lembrete: \n");
+    scanf("%d", &lembretes[0].ano);
+    printf("Digite o mês do lembrete: \n");
+    scanf("%d", &lembretes[0].mes);
+    printf("Digite o dia do lembrete: \n");
+    scanf("%d", &lembretes[0].dia);
+
+    visualizarLembretes();
+}
+
+
+void numeroLembretes(struct lembrete lembretes[]){
+    int i;
+    for(i = 0; i < MAXIMO_LEMBRETES; i++){
+        if(i > MAXIMO_LEMBRETES){
+            printf("Numero maximo de lembretes atingidos! \n");
+            return;
+        }
+        int length = sizeof(lembretes) / sizeof(lembretes[0]);
+        printf("numero de lembres é: %d \n", length);
+        return;
+    }
+}
+
+void visualizarLembretes(){
+    int op;
+    printf("O que deseja visualizar? \n");
+    printf("Pressione 1: visualizar numero de lembretes \n");
+    printf("Pressione 2: visualizar lista de lembretes \n");
+    scanf("%d", &op);
+    switch (op){
+    case 1:
+        numeroLembretes(lembretes);    
+        break;
+    case 2:
+        printf("em construção \n");
+        break;
+    default:
+        break;
+    }    
+    // listar lembretes
+}
+
+void menuLembretes() {
     printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
     printf("Pressione 2: visualizar lembretes \n");
     printf("Pressione 3: para voltar \n");
