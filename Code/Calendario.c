@@ -104,9 +104,11 @@ void menuPrincipal(){
     case 4: 
         limparTerminal();
         calendarioIcev();
+        break;
     case 0:
         limparTerminal();
         printf("Obrigado, volte sempre! \n");
+        break;
       default:
         printf("Opção inválida, tente novamente! \n");
         sleep(2);
@@ -135,16 +137,16 @@ void criarLembretes(){
 
 void numeroLembretes(struct lembrete lembretes[]){
     int i;
+    int numLembretes = 0;
     for(i = 0; i < MAXIMO_LEMBRETES; i++){
-        if(i > MAXIMO_LEMBRETES){
-            printf("Numero maximo de lembretes atingidos! \n");
-            return;
+        if(lembretes[i].dia != 0){ // assumindo que 'dia' é um campo em 'struct lembrete' e que '0' indica um lembrete vazio
+            numLembretes++;
         }
-        int length = sizeof(lembretes) / sizeof(lembretes[0]);
-        printf("numero de lembres é: %d \n", length);
-        return;
     }
-}
+    printf("numero de lembres é: %d \n", numLembretes);
+}    
+
+
 
 void visualizarLembretes(){
     int op;
@@ -154,7 +156,8 @@ void visualizarLembretes(){
     scanf("%d", &op);
     switch (op){
     case 1:
-        numeroLembretes(lembretes);    
+        numeroLembretes(lembretes);
+        printf("Pressione 0 para voltar ao menu principal: \n");    
         break;
     case 2:
         printf("em construção \n");
