@@ -1,38 +1,31 @@
-#include<string.h>
-#include<stdbool.h>
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
-#include<string.h>
-#include<locale.h>
-#include <stdbool.h>
 #include <time.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
 #include <unistd.h>
+#include <stdbool.h>
+#include <stdbool.h>
+#include <stdbool.h>
 
 typedef struct {
     int hora;
     int min;
     char nome[100];
-}evento;
+}lembrete;
 
 // Funções de interface do usuário
 void limparTerminal();
 void menuPrincipal();
-void menuCalendario();
 void logoCalendario();
 char obterEscolha();
 
-// Funções de manipulação de eventos
-bool check(const evento *e);
-evento* UIEvento();
-void novoEvento(evento *e);
-void adicionarEvento(evento lista[], const evento e, const int x);
-void organizar(evento lista[], const int contador);
-void organizarCorreto(evento lista[], int *contador, evento e);
-void deletarEvento(evento lista[], int *contador);
-void visualizarEvento(const evento e);
-void mostrarEventos(const evento lista[], const int contador);
-void exibirEventos(evento lista[], int contador);
+// Função de lembretes
+// ---------------------
+
+
+// ---------------------
 
 // Funções de manipulação de datas
 int eAnoBissexto(int ano);
@@ -46,6 +39,7 @@ void obterDigitos(int num, char* primeiroDigito, char* segundoDigito);
 void visualizarLembretes();
 void calendarioIcev();
 void calendario();
+void menuCalendario();
 
 int main(){
     limparTerminal();
@@ -78,9 +72,10 @@ void menuPrincipal(){
     int opMenuPrincipal;
 
     printf("+===================================================================+\n");
+    printf("|                                                                   |\n");
     printf("|         1 - Calendario                 2 - Criar Lembrete         |\n");
     printf("|                                                                   |\n");
-    printf("|     3 - Visualizar Evento           4 - Calendario Academico      |\n");
+    printf("|     3 - Visualizar Lembrete          4 - Calendario Academico     |\n");
     printf("|                                                                   |\n");
     printf("|                           0 - Exit                                |\n");
     printf("+===================================================================+\n");
@@ -90,7 +85,7 @@ void menuPrincipal(){
     switch (opMenuPrincipal){
     case 1:
         limparTerminal();
-        printf("Calendario \n");
+        calendario();
         break;
     case 2:
         limparTerminal();
@@ -108,17 +103,19 @@ void menuPrincipal(){
         printf("Obrigado, volte sempre! \n");
       default:
         printf("Opção inválida, tente novamente! \n");
+        sleep(2);
+        logoCalendario();
         limparTerminal();
         menuPrincipal();
       }
 }
-
 // Inicio da gestão de lembretes
 
+
 void criarLembretes() {
-    printf("Pressione 1: para criar evento\n");
-    printf("Pressione 2: para deletar evento\n");
-    printf("Pressione 3: para sair\n\n");
+    printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
+    printf("Pressione 2: visualizar lembretes \n");
+    printf("Pressione 3: para voltar \n");
     // função principal para o calendário
 }
 
@@ -133,10 +130,14 @@ int year, mes, dia, x, day2;
 signed char c; // entrada do usuário para mudança de calendário
 int mesArray[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-void menu() {
-    printf("Pressione 1: para criar evento\n");
-    printf("Pressione 2: para deletar evento\n");
-    printf("Pressione 3: para sair\n\n");
+void menuCalendario() {
+    printf("Você selecionou %s %d, %d \n", MonthDisplay[mes - 1], dia, year);
+    printf("   - Para alternar entre os dias, use (a) para o dia anterior e (d) para o próximo dia. \n");
+    printf("   - Para alternar entre os meses, use (w) para o mês anterior e (s) para o próximo mês.\n\n");
+
+    printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
+    printf("Pressione 2: visualizar lembretes \n");
+    printf("Pressione 3: para voltar \n");
     // função principal para o calendário
 }
 
@@ -167,8 +168,8 @@ void GerarCalendario() {
     printf("\n");
 }
 
-int main() {
-    system("clear");
+void calendario() {
+    limparTerminal();
     system("setterm -bold on"); // cabeçalho em negrito
     printf("Calendário de Eventos \n");
     system("setterm -bold off");
@@ -243,12 +244,9 @@ int main() {
     }
 
     // Imprimindo calendário
-    system("clear");
+    limparTerminal();
     GerarCalendario();
-    printf("Você selecionou %s %d, %d \n", MonthDisplay[mes - 1], dia, year);
-    printf("   - Para alternar entre os dias, use (a) para o dia anterior e (d) para o próximo dia. \n");
-    printf("   - Para alternar entre os meses, use (w) para o mês anterior e (s) para o próximo mês.\n\n");
-    menu();
+    menuCalendario();
     
     while (true) {
         scanf(" %c", &c); // leia o comando do usuário
@@ -257,15 +255,15 @@ int main() {
             // Chamar função para criar evento
             printf("Função de criar evento não implementada.\n");
             GerarCalendario();
+            menuCalendario();
         } else if (c == '2') {
             // Chamar função para deletar evento
             printf("Função de deletar evento não implementada.\n");
+            limparTerminal();
             GerarCalendario();
         } else if (c == '3') {
-            system("clear");
-            system("setterm -bold on");
-            printf("\n\n\n TENHA UM ÓTIMO DIA ENQUANTO EU PROGRAMO ISSO!!  :)) \n\n\n\n");
-            system("setterm -bold off");
+            limparTerminal();
+            menuPrincipal();
             break;
         } else if (c == 'w') { // mês anterior
             if (mes == 1) {
@@ -277,7 +275,9 @@ int main() {
             if (dia > mesArray[mes - 1]) {
                 dia = mesArray[mes - 1];
             }
+            limparTerminal();
             GerarCalendario();
+            menuCalendario();
         } else if (c == 's') { // próximo mês
             if (mes == 12) {
                 mes = 1;
@@ -288,7 +288,9 @@ int main() {
             if (dia > mesArray[mes - 1]) {
                 dia = mesArray[mes - 1];
             }
+            limparTerminal();
             GerarCalendario();
+            menuCalendario();
         } else if (c == 'a') { // dia anterior
             if (dia == 1) {
                 if (mes == 1) {
@@ -301,7 +303,9 @@ int main() {
             } else {
                 dia--;
             }
+            limparTerminal();
             GerarCalendario();
+            menuCalendario();
         } else if (c == 'd') { // próximo dia
             if (dia == mesArray[mes - 1]) {
                 dia = 1;
@@ -314,13 +318,17 @@ int main() {
             } else {
                 dia++;
             }
+            limparTerminal();
             GerarCalendario();
+            menuCalendario();
         } else {
             printf("Resposta inválida. Por favor, tente novamente. \n");
+            limparTerminal();
             GerarCalendario();
+            menuCalendario();
         }
     }
-    return 0;
+
 }
 
 // Final da gestão de calendario
@@ -349,7 +357,7 @@ void calendarioIcev(){
     switch (operecao){
     case 0:
         limparTerminal();
-        MenuPrincipal();
+        menuPrincipal();
         break;  
     default:
         printf("opção invalida! \n");
