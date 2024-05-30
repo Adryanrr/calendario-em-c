@@ -9,10 +9,12 @@
 #include <stdbool.h>
 #include <stdbool.h>
 
+FILE * arquivo;
 #define MAXIMO_LEMBRETES 10
 
 struct lembrete{
     char nome[100];
+    char descricao[250];
     int ano;
     int mes;       
     int dia;          
@@ -24,7 +26,7 @@ struct lembrete lembretes[MAXIMO_LEMBRETES];
 void limparTerminal();
 void menuPrincipal();
 void logoCalendario();
-char obterEscolha();
+
 
 // Função de lembretes
 // ---------------------
@@ -33,12 +35,6 @@ char obterEscolha();
 // ---------------------
 
 // Funções de manipulação de datas
-int eAnoBissexto(int ano);
-int calcularPrimeiroDiaSemana(int ano, int mes);
-void imprimirCalendario(int ano, int mes, int dia, int mesArray[]);
-int intervalo1(const int minimo, const int maximo);
-int intervalo2(const int minimo, const int maximo);
-void obterDigitos(int num, char* primeiroDigito, char* segundoDigito);
 
 // Funções específicas do calendário
 void visualizarLembretes();
@@ -48,6 +44,7 @@ void criarLembretes();
 void menuCalendario();
 
 int main(){
+    arquivo = fopen("c:\\Users\\ianfe\\Documents\\Lembretes.txt","w");
     limparTerminal();
     logoCalendario();
     menuPrincipal();
@@ -61,6 +58,7 @@ void limparTerminal() {
     system("clear");
 #endif
 }
+
 
 void logoCalendario(){
 
@@ -130,8 +128,11 @@ void criarLembretes(){
     scanf("%d", &lembretes[0].mes);
     printf("Digite o dia do lembrete: \n");
     scanf("%d", &lembretes[0].dia);
-
-    visualizarLembretes();
+    printf("Digite a descrição do lembrete: \n");
+    scanf("%s", &lembretes[0].descricao);
+    fprintf(arquivo,"\n%d/%d/%d",lembretes[0].dia,lembretes[0].mes,lembretes[0].ano);
+    fprintf(arquivo,": %s",lembretes[0].nome);
+    fprintf(arquivo,"\n%s",lembretes[0].descricao);
 }
 
 
