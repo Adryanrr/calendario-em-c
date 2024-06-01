@@ -1,0 +1,9 @@
+{
+  "files.associations": {
+    ".env.*": "dotenv",
+    ".prettierrc": "json",
+    "*.css": "css",
+    "fcntl.h": "c",
+    "string.h": "c"
+  }
+}

@@ -1,14 +1,14 @@
 #include <time.h>
 #include <stdio.h>
+#include <fcntl.h>
 #include <string.h>
 #include <stdlib.h>
-#include <string.h>
 #include <dirent.h>
 #include <locale.h>
 #include <unistd.h>
 #include <stdbool.h>
-#include <stdbool.h>
-#include <stdbool.h>
+#include <sys/ioctl.h>
+
 
 FILE *arquivo;
 #define MAXIMO_LEMBRETES 10
@@ -20,6 +20,29 @@ struct lembrete{
     int dia;          
 };
 struct lembrete lembretes[MAXIMO_LEMBRETES];
+int contagem;
+
+//
+
+static const char *MonthDisplay[] = {
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro",
+    "Outubro", "Novembro", "Dezembro"};
+int ano, mes, dia, x, day2;
+signed char c; // entrada do usuario para mudança de calendario
+int mesArray[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+void menuCalendario() {
+    printf("Você selecionou %s %d, %d \n", MonthDisplay[mes - 1], dia, ano);
+    printf("   - Para alternar entre os dias, use (a) para o dia anterior e (d) para o próximo dia. \n");
+    printf("   - Para alternar entre os meses, use (w) para o mês anterior e (s) para o próximo mês.\n\n");
+
+    printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
+    printf("Pressione 2: visualizar lembretes \n");
+    printf("Pressione 3: para voltar \n");
+    // função principal para o calendario
+}
+
+//
 
 // Função de manipulação de terminal
 void limparTerminal();
@@ -62,7 +85,10 @@ printf("██║     ███████║██║     █████╗  
 printf("██║     ██╔══██║██║     ██╔══╝  ██║╚██╗██║██║  ██║██╔══██║██╔══██╗██║██║   ██║ \n");
 printf("╚██████╗██║  ██║███████╗███████╗██║ ╚████║██████╔╝██║  ██║██║  ██║██║╚██████╔╝ \n");
 printf(" ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝  \n");
-                                                                              
+
+printf("\n");
+printf("\n");                                                           
+
 }
 
 void menuPrincipal(){
@@ -77,6 +103,8 @@ void menuPrincipal(){
     printf("|                                                                   |\n");
     printf("|                           0 - Exit                                |\n");
     printf("+===================================================================+\n");
+    printf("\n");                                                           
+
     printf("Digite Qual opção você deseja acessar: \n");
     scanf("%d", &opMenuPrincipal);
 
@@ -112,6 +140,8 @@ void menuPrincipal(){
 
 // Inicio da gestão de lembretes
 
+
+
 void criarLembretes(){
     
     struct lembrete lembrete;
@@ -131,8 +161,18 @@ void criarLembretes(){
     printf("Digite a descrição do lembrete: \n");
     fgets(lembrete.descricao, 150, stdin);
 
-    fprintf(arquivo,"\n%d/%02d/%d",lembrete.dia,lembrete.mes,lembrete.ano);
-    fprintf(arquivo,"\n%s",lembrete.descricao);
+    fprintf(arquivo,"Data: %02d/%02d/%d \n",lembrete.dia,lembrete.mes,lembrete.ano);
+    fprintf(arquivo,"Descrição:%s \n",lembrete.descricao);
+
+    fclose(arquivo);
+
+    limparTerminal();
+    printf("Criado com sucesso! \n");
+    sleep(20);
+    limparTerminal();
+    logoCalendario();
+    menuPrincipal();
+
 }
 
 void numeroLembretes(struct lembrete lembretes[]){
@@ -205,23 +245,7 @@ void menuLembretes() {
 
 // inicio da gestão de calendario
 
-static const char *MonthDisplay[] = {
-    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro",
-    "Outubro", "Novembro", "Dezembro"};
-int ano, mes, dia, x, day2;
-signed char c; // entrada do usuario para mudança de calendario
-int mesArray[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-void menuCalendario() {
-    printf("Você selecionou %s %d, %d \n", MonthDisplay[mes - 1], dia, ano);
-    printf("   - Para alternar entre os dias, use (a) para o dia anterior e (d) para o próximo dia. \n");
-    printf("   - Para alternar entre os meses, use (w) para o mês anterior e (s) para o próximo mês.\n\n");
-
-    printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
-    printf("Pressione 2: visualizar lembretes \n");
-    printf("Pressione 3: para voltar \n");
-    // função principal para o calendario
-}
 
 void GerarCalendario() {
     // Fonte da linha acima: cadaeit.net
@@ -256,12 +280,12 @@ void calendario() {
     printf("Calendario de Eventos \n");
     system("setterm -bold off");
 
-    printf("Digite o ano: ");
-    scanf("%d", &ano); // entrada do usuario para o ano
-    while (ano < 0) {
-        printf("Ano não adequado. \n");
-        printf("Digite o ano: ");
-        scanf("%d", &ano); // entrada do usuario para o ano
+    printf("Digite o dia: ");
+    scanf("%d", &dia); // entrada do usuario para o dia
+    while (dia < 1 || dia > 31) {
+        printf("Dia não adequado. \n");
+        printf("Digite o dia: ");
+        scanf("%d", &dia); // entrada do usuario para o dia
     }
 
     printf("Digite o mês: ");
@@ -272,12 +296,12 @@ void calendario() {
         scanf("%d", &mes); // entrada do usuario para o mês
     }
 
-    printf("Digite o dia: ");
-    scanf("%d", &dia); // entrada do usuario para o dia
-    while (dia < 1 || dia > 31) {
-        printf("Dia não adequado. \n");
-        printf("Digite o dia: ");
-        scanf("%d", &dia); // entrada do usuario para o dia
+    printf("Digite o ano: ");
+    scanf("%d", &ano); // entrada do usuario para o ano
+    while (ano < 0) {
+        printf("Ano não adequado. \n");
+        printf("Digite o ano: ");
+        scanf("%d", &ano); // entrada do usuario para o ano
     }
 
     // Verifica validade do dia para o mês
