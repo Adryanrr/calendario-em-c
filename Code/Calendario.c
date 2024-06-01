@@ -1,14 +1,14 @@
 #include <time.h>
 #include <stdio.h>
+#include <fcntl.h>
 #include <string.h>
 #include <stdlib.h>
-#include <string.h>
 #include <dirent.h>
 #include <locale.h>
 #include <unistd.h>
 #include <stdbool.h>
-#include <stdbool.h>
-#include <stdbool.h>
+#include <sys/ioctl.h>
+
 
 FILE *arquivo;
 #define MAXIMO_LEMBRETES 10
@@ -63,7 +63,10 @@ printf("██║     ███████║██║     █████╗  
 printf("██║     ██╔══██║██║     ██╔══╝  ██║╚██╗██║██║  ██║██╔══██║██╔══██╗██║██║   ██║ \n");
 printf("╚██████╗██║  ██║███████╗███████╗██║ ╚████║██████╔╝██║  ██║██║  ██║██║╚██████╔╝ \n");
 printf(" ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝  \n");
-                                                                              
+
+printf("\n");
+printf("\n");                                                           
+
 }
 
 void menuPrincipal(){
@@ -78,6 +81,8 @@ void menuPrincipal(){
     printf("|                                                                   |\n");
     printf("|                           0 - Exit                                |\n");
     printf("+===================================================================+\n");
+    printf("\n");                                                           
+
     printf("Digite Qual opção você deseja acessar: \n");
     scanf("%d", &opMenuPrincipal);
 
@@ -134,6 +139,11 @@ void criarLembretes(){
 
     fprintf(arquivo,"\n%d/%02d/%d",lembrete.dia,lembrete.mes,lembrete.ano);
     fprintf(arquivo,"\n%s",lembrete.descricao);
+
+    limparTerminal();
+    printf("Lembrete criado com sucesso! \n");
+    sleep(0.9);
+    menuPrincipal();
 }
 
 
@@ -211,12 +221,12 @@ void menuLembretes() {
 static const char *MonthDisplay[] = {
     "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro",
     "Outubro", "Novembro", "Dezembro"};
-int year, mes, dia, x, day2;
+int ano, mes, dia, x, day2;
 signed char c; // entrada do usuario para mudança de calendario
 int mesArray[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 void menuCalendario() {
-    printf("Você selecionou %s %d, %d \n", MonthDisplay[mes - 1], dia, year);
+    printf("Você selecionou %s %d, %d \n", MonthDisplay[mes - 1], dia, ano);
     printf("   - Para alternar entre os dias, use (a) para o dia anterior e (d) para o próximo dia. \n");
     printf("   - Para alternar entre os meses, use (w) para o mês anterior e (s) para o próximo mês.\n\n");
 
@@ -229,7 +239,7 @@ void menuCalendario() {
 void GerarCalendario() {
     // Fonte da linha acima: cadaeit.net
     system("setterm -bold on");                                    // cabeçalho em negrito
-    printf("\n         %s    %d \n", MonthDisplay[mes - 1], year); // cabeçalho
+    printf("\n         %s    %d \n", MonthDisplay[mes - 1], ano); // cabeçalho
     printf("\nDOM  SEG  TER  QUA  QUI  SEX  SAB\n");
     system("setterm -bold off");
 
@@ -260,11 +270,11 @@ void calendario() {
     system("setterm -bold off");
 
     printf("Digite o ano: ");
-    scanf("%d", &year); // entrada do usuario para o ano
-    while (year < 0) {
+    scanf("%d", &ano); // entrada do usuario para o ano
+    while (ano < 0) {
         printf("Ano não adequado. \n");
         printf("Digite o ano: ");
-        scanf("%d", &year); // entrada do usuario para o ano
+        scanf("%d", &ano); // entrada do usuario para o ano
     }
 
     printf("Digite o mês: ");
@@ -293,7 +303,7 @@ void calendario() {
                 continue;
             }
         } else if (mes == 2) {
-            if (((year % 4) == 0 && (year % 100 != 0)) || (year % 400 == 0)) {
+            if (((ano % 4) == 0 && (ano % 100 != 0)) || (ano % 400 == 0)) {
                 mesArray[1] = 29;
                 if (dia > 29) {
                     printf("Dia não adequado. \n");
@@ -315,8 +325,8 @@ void calendario() {
 
     // Calcula o primeiro dia do mês
     x = 1;
-    x = (x += mes < 3 ? year : year - 2, 23 * mes / 9 + x + 4 + year / 4 - year / 100 + year / 400) % 7;
-    if ((year % 4) == 0 && ((year % 100) != 0 || (year % 400) == 0)) {
+    x = (x += mes < 3 ? ano : ano - 2, 23 * mes / 9 + x + 4 + ano / 4 - ano / 100 + ano / 400) % 7;
+    if ((ano % 4) == 0 && ((ano % 100) != 0 || (ano % 400) == 0)) {
         mesArray[1] = 29;
         if (mes == 1 || mes == 2) {
             x--;
@@ -352,7 +362,7 @@ void calendario() {
             break;
         } else if (c == 'w') { // mês anterior
             if (mes == 1) {
-                year--;
+                ano--;
                 mes = 12;
             } else {
                 mes--;
@@ -366,7 +376,7 @@ void calendario() {
         } else if (c == 's') { // proximo mês
             if (mes == 12) {
                 mes = 1;
-                year++;
+                ano++;
             } else {
                 mes++;
             }
@@ -380,7 +390,7 @@ void calendario() {
             if (dia == 1) {
                 if (mes == 1) {
                     mes = 12;
-                    year--;
+                    ano--;
                 } else {
                     mes--;
                 }
@@ -396,7 +406,7 @@ void calendario() {
                 dia = 1;
                 if (mes == 12) {
                     mes = 1;
-                    year++;
+                    ano++;
                 } else {
                     mes++;
                 }
