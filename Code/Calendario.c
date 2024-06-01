@@ -137,7 +137,7 @@ void criarLembretes(){
     printf("Digite a descrição do lembrete: \n");
     fgets(lembrete.descricao, 150, stdin);
 
-    fprintf(arquivo,"\n%d/%02d/%d",lembrete.dia,lembrete.mes,lembrete.ano);
+    fprintf(arquivo,"\n%02d/%02d/%d",lembrete.dia,lembrete.mes,lembrete.ano);
     fprintf(arquivo,"\n%s",lembrete.descricao);
 
     limparTerminal();
