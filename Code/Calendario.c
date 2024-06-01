@@ -168,7 +168,7 @@ void criarLembretes(){
 
     limparTerminal();
     printf("Criado com sucesso! \n");
-    sleep(20);
+    sleep(2);
     limparTerminal();
     logoCalendario();
     menuPrincipal();
