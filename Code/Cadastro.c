@@ -90,11 +90,22 @@ void cadastrarUsuario(struct usuario usuarios[], int *contagem){
 
 
 void listarUsuarios(int contagem, struct usuario usuarios[]) {
+  char nomeUsuario[50];
+  char senha[50];
+  int i = 1;
+
+  FILE *arquivo = fopen("usuarios.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo! \n");
+        exit(1);
+    }
     limparTerminal();
     printf("Usuarios cadastrados:\n");
-    for (int i = 0; i < contagem; i++) {
-        printf("%d. %s\n", i + 1, usuarios[i].nomeUsuario);
-    }
+    while (fscanf(arquivo, "%s\n%s\n", nomeUsuario, senha) != EOF) {
+        printf("%d. %s\n", i, nomeUsuario);
+        i++;
+  }
+  fclose(arquivo);
 }
 
 
