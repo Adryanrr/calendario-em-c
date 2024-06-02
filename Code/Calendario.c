@@ -624,6 +624,13 @@ void calendarioIcev(){
     }
 }
 
+int obterConfirmacao(const char *mensagem) {
+    int confirmacao;
+    printf("%s (1 para Sim / 0 para Não): ", mensagem);
+    scanf("%d", &confirmacao);
+    return confirmacao;
+}
+
 void creditosDesenvolvedores(){
 
     printf("██████╗ ███████╗███████╗███████╗███╗   ██╗██╗   ██╗ ██████╗ ██╗    ██╗   ██╗███████╗██████╗  ██████╗ ██████╗ ███████╗███████╗\n");
@@ -669,22 +676,36 @@ void creditosDesenvolvedores(){
     printf("\n");
     
     int op;
-    switch (op){
-    case 1:
-        printf("Deseja voltar ao menu principal? \n");
-        scanf("%d", &op);
-        break;
-    case 2:
-        printf("Deseja sair da aplicação? \n");  
+    while (1) {
+        printf("Escolha uma operação:\n");
+        printf("1. Voltar ao menu principal\n");
+        printf("2. Sair da aplicação\n");
+        printf("Escolha uma opção: ");
         scanf("%d", &op);
 
-    default:
-        printf("Operação invalida! \n");
-        printf("Aguarde 2s! \n");
-        sleep(2);
-        limparTerminal();
-        creditosDesenvolvedores();
-        break;
+        switch (op) {
+            case 1:
+                if (obterConfirmacao("Deseja voltar ao menu principal?")) {
+                    limparTerminal();
+                    menuPrincipal();
+                }
+                break;
+            case 2:
+                if (obterConfirmacao("Deseja sair da aplicação?")) {
+                    limparTerminal();
+                    printf("Saindo da aplicação...\n");
+                    sleep(2);
+                    limparTerminal();
+                    return;
+                }
+                break;
+            default:
+                printf("Operação inválida!\nAguarde 2s!\n");
+                sleep(2);
+                limparTerminal();
+                creditosDesenvolvedores();
+                break;
+        }
     }
 }
 
