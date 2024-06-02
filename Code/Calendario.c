@@ -209,12 +209,14 @@ void listarLembretes() {
     int i = 1;
 
     while (fgets(linha, sizeof(linha), arquivo)) {
-        if (strncmp(linha, "Descrição:", 10) == 0) {
-            printf("%d. %s", i, linha + 11); // Pula "Descrição: "
+        if (strncmp(linha, "Data:", 5) == 0) {
+            printf("%d. %s", i, linha); // Mostra a linha da data
+            if (fgets(linha, sizeof(linha), arquivo)) {
+                printf("   %s", linha); // Mostra a linha da descrição
+            }
             i++;
         }
     }
-
     fclose(arquivo);
 
     int op = 0;
