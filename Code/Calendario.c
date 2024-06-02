@@ -619,10 +619,10 @@ void creditosDesenvolvedores(){
     printf(" |#                                   |      \ \/ / /___________/  /            \n");
     printf("|#                                    |_______\__/________________/             \n");
     printf("|                                      |               |  |  / /                \n");
-    printf("|                                      |               |  | / /                 \n");
-    printf("|                                      |       ________|  |/ /________          \n");
-    printf("|                                      |      /_______/    \_________/\         \n");
-    printf("|                                      |     /        /  /           \ )        \n");
+    printf("| @adryanrr                            |               |  | / /                 \n");
+    printf("| @MatheusJuK                          |       ________|  |/ /________          \n");
+    printf("| @Whuanderson                         |      /_______/    \_________/\         \n");
+    printf("| @AndreNTeixeira                      |     /        /  /           \ )        \n");
     printf("|                                      |    /OO^^^^^^/  / /^^^^^^^^^OO\)        \n");
     printf("|                                      |            /  / /                      \n");
     printf("|                                      |           /  / /                       \n");
