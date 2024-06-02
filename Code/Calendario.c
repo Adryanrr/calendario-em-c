@@ -80,14 +80,19 @@ void menuPrincipal(){
     setlocale(LC_ALL,"Portuguese_Brazil");
     int opMenuPrincipal;
 
-    printf("+===================================================================+\n");
-    printf("|                                                                   |\n");
-    printf("|         1 - Calendario                 2 - Criar Lembrete         |\n");
-    printf("|                                                                   |\n");
-    printf("|     3 - Visualizar Lembrete          4 - Calendario Academico     |\n");
-    printf("|                                                                   |\n");
-    printf("|                           0 - Exit                                |\n");
-    printf("+===================================================================+\n");
+    printf("  +=======================================================================+\n");
+    printf("  |                            MENU PRINCIPAL                             |\n");
+    printf("  +=======================================================================+\n");
+    printf("  |                                                                       |\n");
+    printf("  |                  1                                2                   |\n");
+    printf("  |              Calendario                    Criar Lembrete             |\n");
+    printf("  |                                                                       |\n");
+    printf("  |                  3                                4                   |\n");
+    printf("  |          Gerenciar Lembretes            Calendario Academico          |\n");
+    printf("  |                                                                       |\n");
+    printf("  |                                  0                                    |\n");
+    printf("  |                                SAIDA                                  |\n");
+    printf("  +========================================================================\n");
     printf("\n");                                                           
 
     printf("Digite Qual opção você deseja acessar: \n");
@@ -127,13 +132,17 @@ void menuPrincipal(){
 
 
 
-void criarLembretes(){
-    
-    arquivo = fopen("usuarios.txt", "a");
-    if (contagem >= MAXIMO_LEMBRETES){
-    printf("Numero maximo de usuarios atingidos! \n");
-    return;
-  }
+void criarLembretes() {
+    if (contagem >= MAXIMO_LEMBRETES) {
+        printf("Número máximo de lembretes atingido! \n");
+        return;
+    }
+
+    FILE *arquivo = fopen("Lembretes.txt", "a");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo! \n");
+        return;
+    }
 
     struct lembrete lembrete;
 
@@ -151,11 +160,13 @@ void criarLembretes(){
 
     printf("Digite a descrição do lembrete: \n");
     fgets(lembrete.descricao, 150, stdin);
+    lembrete.descricao[strcspn(lembrete.descricao, "\n")] = '\0'; // Remover a nova linha
 
-    fprintf(arquivo,"Data: %02d/%02d/%d \n",lembrete.dia,lembrete.mes,lembrete.ano);
-    fprintf(arquivo,"Descrição: %s \n",lembrete.descricao);
+    fprintf(arquivo, "Data: %02d/%02d/%d\n", lembrete.dia, lembrete.mes, lembrete.ano);
+    fprintf(arquivo, "Descrição: %s\n", lembrete.descricao);
 
     fclose(arquivo);
+    contagem++;
 
     limparTerminal();
     printf("Criado com sucesso! \n");
@@ -163,57 +174,130 @@ void criarLembretes(){
     limparTerminal();
     logoCalendario();
     menuPrincipal();
-
 }
 
-
 void listarLembretes() {
-    FILE *arquivo = fopen("usuarios.txt", "r");
+    FILE *arquivo = fopen("Lembretes.txt", "r");
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo! \n");
-        exit(1);
+        return;
     }
+
+    limparTerminal();
+    printf("Lista de lembretes: \n");
+    char linha[300];
+    int i = 1;
+
+    while (fgets(linha, sizeof(linha), arquivo)) {
+        if (strncmp(linha, "Descrição:", 10) == 0) {
+            printf("%d. %s", i, linha + 11); // Pula "Descrição: "
+            i++;
+        }
+    }
+
+    fclose(arquivo);
+
+    int op = 0;
+    printf("\nPressione 1 para voltar ao menu principal \n");
+    printf("Pressione 2 para criar um lembrete \n");
+    scanf("%d", &op);
+    getchar(); // Consumir o '\n' deixado por scanf
+
+    switch (op) {
+        case 1:
+            limparTerminal();
+            menuPrincipal();
+            break;
+        case 2:
+            limparTerminal();
+            criarLembretes();
+            break;
+        default:
+            printf("Operação inválida \n");
+            break;
+    }
+}
+
+void listarNumeroLembretes() {
+    printf("Número de lembretes é: %d \n", contagem);
+}
+
+// Função para deletar lembrete
+void deletarLembrete() {
+    FILE *arquivo = fopen("Lembretes.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo! \n");
+        return;
+    }
+
     limparTerminal();
     printf("Lista de lembretes: \n");
     char linha[300];
     int i = 1;
     while (fgets(linha, sizeof(linha), arquivo)) {
-        if (strncmp(linha, "Descricao:", 10) == 0) {
-            printf("%d. %s", i, linha + 11); // Pula "Descricao: "
+        if (strncmp(linha, "Descrição:", 10) == 0) {
+            printf("%d. %s", i, linha + 11); // Pula "Descrição: "
             i++;
         }
     }
     fclose(arquivo);
-}
 
-void ListarNumeroLembretes(struct lembrete lembretes[]) {
-    int i;
-    int numLembretes = 0;
-    for (i = 0; i < MAXIMO_LEMBRETES; i++) {
-        if (lembretes[i].dia != 0) { // assumindo que 'dia' é um campo em 'struct lembrete' e que '0' indica um lembrete vazio
-            numLembretes++;
+    printf("\nDigite o número do lembrete que deseja deletar: ");
+    int opcao;
+    scanf("%d", &opcao);
+
+    if (opcao < 1 || opcao >= i) {
+        printf("Opção inválida! \n");
+        return;
+    }
+
+    arquivo = fopen("Lembretes.txt", "r");
+    FILE *temp = fopen("temp.txt", "w");
+    if (arquivo == NULL || temp == NULL) {
+        printf("Erro ao abrir o arquivo! \n");
+        return;
+    }
+
+    i = 1;
+    while (fgets(linha, sizeof(linha), arquivo)) {
+        if (!(strncmp(linha, "Descrição:", 10) == 0 && i == opcao)) {
+            fputs(linha, temp);
+        } else {
+            i++;
         }
     }
-    printf("Número de lembretes é: %d \n", numLembretes);
+    fclose(arquivo);
+    fclose(temp);
+
+    remove("Lembretes.txt");
+    rename("temp.txt", "Lembretes.txt");
+
+    limparTerminal();
+    printf("Lembrete deletado com sucesso! \n");
+    sleep(2);
+    limparTerminal();
+    logoCalendario();
+    menuPrincipal();
 }
 
-void visualizarLembretes(struct lembrete lembretes[]) {
+
+void visualizarLembretes() {
     int op;
     printf("O que deseja visualizar? \n");
     printf("Pressione 1: visualizar número de lembretes \n");
-    printf("Pressione 2: visualizar lista de lembretes \n");
+    printf("Pressione 2: Deletar um lembrete \n");
     scanf("%d", &op);
+
     switch (op) {
-    case 1:
-        ListarNumeroLembretes(lembretes);
-        printf("Pressione 0 para voltar ao menu principal: \n");
-        break;
-    case 2:
-        listarLembretes();
-        break;
-    default:
-        printf("Opção inválida! \n");
-        break;
+        case 1:
+            listarLembretes();
+            break;
+        case 2:
+            deletarLembrete();
+            break;
+        default:
+            printf("Opção inválida! \n");
+            break;
     }
 }
 
