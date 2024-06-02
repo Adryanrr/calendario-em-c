@@ -622,6 +622,10 @@ void creditosDesenvolvedores(){
 #define PATTERN "_ _ _"  // padrão da estrada
 #define PATTERN_LEN 5  // comprimento do padrão da estrada
 
+#define BLUE "\x1B[34m"
+#define RED "\x1B[31m"
+#define RESET "\x1B[0m"
+
 void set_nonblocking_input() {
     struct termios ttystate;
     tcgetattr(STDIN_FILENO, &ttystate);
@@ -658,12 +662,11 @@ void saida() {
     }
     road[LENGTH] = '\0';  // termina a string
     // Desenha o carro ASCII art na tela
-    printf("         _______                |----------------------------------|     \n");
-    printf("        //  ||\\ \\              |      obrigado, volte sempre!     |    \n");
-    printf("  _____//___||_\\ \\___      ___|                                  |     \n");
-    printf("  )  _          _    \\____|    |  Pressione '0' para pular e sair  |    \n");
-    printf("  |_/ \\________/ \\___|          |----------------------------------|   \n");
-    printf("    \\_/        \\_/                                                     \n");
+    printf(BLUE "                      _____________      ____       ______________________ \n");
+    printf("              ________)            \\    /   /      /                      \\ \n");
+    printf("     ________/  \\      " RED "RED BULL" RESET BLUE "   /  \\_/   |------/  Obrigado pela visita, \\  \n");
+    printf("____/_______| () |_______________| () |____|      \\    Volte Sempre!       /    \n");
+    printf("|__ |        \\__/                 \\__/             \\______________________/     \n" RESET);
     
 
     while (1) {
