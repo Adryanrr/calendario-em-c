@@ -38,8 +38,8 @@ void limparTerminal();
 void menuPrincipal();
 void logoCalendario();
 // 
-
-void visualizarLembretes();
+void creditosDesenvolvedores();
+void gerenicarLembretes();
 void calendarioIcev();
 void calendario();
 void criarLembretes();
@@ -80,20 +80,22 @@ void menuPrincipal(){
     setlocale(LC_ALL,"Portuguese_Brazil");
     int opMenuPrincipal;
 
-    printf("  +=======================================================================+\n");
-    printf("  |                            MENU PRINCIPAL                             |\n");
-    printf("  +=======================================================================+\n");
-    printf("  |                                                                       |\n");
-    printf("  |                  1                                2                   |\n");
-    printf("  |              Calendario                    Criar Lembrete             |\n");
-    printf("  |                                                                       |\n");
-    printf("  |                  3                                4                   |\n");
-    printf("  |          Gerenciar Lembretes            Calendario Academico          |\n");
-    printf("  |                                                                       |\n");
-    printf("  |                                  0                                    |\n");
-    printf("  |                                SAIDA                                  |\n");
-    printf("  +========================================================================\n");
-    printf("\n");                                                           
+    printf("  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+    printf("  ┃                              MENU PRINCIPAL                             ┃\n");
+    printf("  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+    printf("  ┃                                                                         ┃\n");
+    printf("  ┃        ┏━━━━━━━━━━(1)━━━━━━━━━┑           ┏━━━━━━━━━━(2)━━━━━━━━━┑      ┃\n");
+    printf("  ┃               Calendario                       Criar Lembrete           ┃\n");
+    printf("  ┃        ┗━━━━━━━━━━━━━━━━━━━━━━┙           ┗━━━━━━━━━━━━━━━━━━━━━━┙      ┃\n");
+    printf("  ┃        ┏━━━━━━━━━━(3)━━━━━━━━━┑           ┏━━━━━━━━━━(4)━━━━━━━━━┑      ┃\n");
+    printf("  ┃           Gerenciar Lembretes               Calendario Academico        ┃\n");
+    printf("  ┃        ┗━━━━━━━━━━━━━━━━━━━━━━┙           ┗━━━━━━━━━━━━━━━━━━━━━━┙      ┃\n");
+    printf("  ┃        ┏━━━━━━━━━━(5)━━━━━━━━━┑           ┏━━━━━━━━━━(0)━━━━━━━━━┑      ┃\n");
+    printf("  ┃                Creditos                             Saida               ┃\n");
+    printf("  ┃        ┗━━━━━━━━━━━━━━━━━━━━━━┙           ┗━━━━━━━━━━━━━━━━━━━━━━┙      ┃\n");
+    printf("  ┃                                                                         ┃\n");
+    printf("  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+    printf("\n");                                                          
 
     printf("Digite Qual opção você deseja acessar: \n");
     scanf("%d", &opMenuPrincipal);
@@ -109,11 +111,15 @@ void menuPrincipal(){
         break;
     case 3:
         limparTerminal();
-        visualizarLembretes(lembretes);
+        gerenicarLembretes(lembretes);
         break;
     case 4: 
         limparTerminal();
         calendarioIcev();
+        break;
+    case 5:
+        limparTerminal();
+        creditosDesenvolvedores();
         break;
     case 0:
         limparTerminal();
@@ -281,7 +287,7 @@ void deletarLembrete() {
 }
 
 
-void visualizarLembretes() {
+void gerenicarLembretes() {
     int op;
     printf("O que deseja visualizar? \n");
     printf("Pressione 1: visualizar número de lembretes \n");
@@ -333,6 +339,7 @@ void menuCalendario() {
 void GerarCalendario() {
 
     limparTerminal();
+    logoCalendario();
     system("setterm -bold on"); // cabeçalho em negrito
     printf("Calendario de Eventos \n");
     system("setterm -bold off");
@@ -445,15 +452,13 @@ void calendario() {
         if (c == '1') {
             // Chamar função para criar evento
             criarLembretes();
-            GerarCalendario();
-            menuCalendario();
         } else if (c == '2') {
-            // Chamar função para deletar evento
-            printf("Função de deletar evento não implementada.\n");
+            // Chamar função para gerenciar evento
             limparTerminal();
-            GerarCalendario();
+            gerenicarLembretes();
         } else if (c == '3') {
             limparTerminal();
+            logoCalendario();
             menuPrincipal();
             break;
         } else if (c == 'w') { // mês anterior
@@ -467,6 +472,7 @@ void calendario() {
                 dia = mesArray[mes - 1];
             }
             limparTerminal();
+            logoCalendario();
             GerarCalendario();
             menuCalendario();
         } else if (c == 's') { // proximo mês
@@ -480,6 +486,7 @@ void calendario() {
                 dia = mesArray[mes - 1];
             }
             limparTerminal();
+            logoCalendario();
             GerarCalendario();
             menuCalendario();
         } else if (c == 'a') { // dia anterior
@@ -495,6 +502,7 @@ void calendario() {
                 dia--;
             }
             limparTerminal();
+            logoCalendario();
             GerarCalendario();
             menuCalendario();
         } else if (c == 'd') { // proximo dia
@@ -510,11 +518,13 @@ void calendario() {
                 dia++;
             }
             limparTerminal();
+            logoCalendario();
             GerarCalendario();
             menuCalendario();
         } else {
             printf("Resposta inválida. Por favor, tente novamente. \n");
             limparTerminal();
+            logoCalendario();
             GerarCalendario();
             menuCalendario();
         }
@@ -526,25 +536,42 @@ void calendario() {
 
 void calendarioIcev(){
  
-    int operecao;
+    
 
-    printf("+=======|==========================================================================+\n");
-    printf("|HORARI0|    SEGUNDA    |    TERÇA    |    QUARTA    |    QUINTA     |    SEXTA    |\n");
-    printf("|-------|---------------|-------------|--------------|---------------|-------------|\n");
-    printf("| 14:30 |  Arquiterura  |  Matematica | Arquiterura  |  Algoritimo   | Algoritimo  |\n");
-    printf("|       |       de      |   Discreta  |     de       |       e       |      e      |\n");
-    printf("| 16:10 |  computadores |             | computadores |  Programação  | Programação |\n");
-    printf("|-------|---------------|-------------|--------------|---------------|-------------|\n");
-    printf("| 16:20 |               |  Engenharia |  Matematica  |   Engenharia  |  Projeto    |\n");
-    printf("|       | Seminarios I  |      de     |   Discreta   |       de      |     de      |\n");
-    printf("| 18:00 |               |   Software  |              |    Software   | Extensão I  |\n");
-    printf("|-------|---------------|-------------|--------------|---------------|-------------|\n");
-    printf("| 18:10 |               |             |              |               |             |\n");
-    printf("|       |   Ingles I    |             |              |               |             |\n");
-    printf("| 20:00 |               |             |              |               |             |\n");
-    printf("+=======|+=========================================================================+\n");
+    printf("                                ██╗ ██████╗███████╗██╗   ██╗ \n");
+    printf("                                ██║██╔════╝██╔════╝██║   ██║ \n");
+    printf("                                ██║██║     █████╗  ██║   ██║ \n");
+    printf("                                ██║██║     ██╔══╝  ╚██╗ ██╔╝ \n");
+    printf("                                ██║╚██████╗███████╗ ╚████╔╝  \n");
+    printf("                                ╚═╝ ╚═════╝╚══════╝  ╚═══╝   \n");
+    printf("                               Instituto de Ensino Superior  \n"); 
+    printf("\n"); 
+    
+    printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+    printf("┃                       CALENDARIO ACADEMICO ENGENHARIA DE SOFTWARE TURMA ADA                    ┃\n");
+    printf("┣━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┫\n");
+    printf("┃         ┃                 ┃                ┃                 ┃                ┃                ┃\n");
+    printf("┃ HORARI0 ┃     SEGUNDA     ┃     TERÇA      ┃     QUARTA      ┃     QUINTA     ┃      SEXTA     ┃\n");
+    printf("┃         ┃                 ┃                ┃                 ┃                ┃                ┃\n");
+    printf("┣━━━━━━━━━╋━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫\n");
+    printf("┃  14:30  ┃   Arquitetura   ┃   Matematica   ┃   Arquitetura   ┃   Algoritimo   ┃   Algoritimo   ┃\n");
+    printf("┃         ┃        de       ┃    Discreta    ┃       de        ┃        e       ┃       e        ┃\n");
+    printf("┃  16:10  ┃   computadores  ┃                ┃  computadores   ┃   Programação  ┃   Programação  ┃\n");
+    printf("┣━━━━━━━━━┻━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫\n");
+    printf("┃  16:20  ┃                 ┃   Engenharia   ┃   Matematica    ┃   Engenharia   ┃     Projeto    ┃\n");
+    printf("┃         ┃   Seminarios I  ┃       de       ┃    Discreta     ┃       de       ┃       de       ┃\n");
+    printf("┃  18:00  ┃                 ┃    Software    ┃                 ┃    Software    ┃    Extensão I  ┃\n");
+    printf("┣━━━━━━━━━╋━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫\n");
+    printf("┃  18:10  ┃                 ┃                ┃                 ┃                ┃                ┃\n");
+    printf("┃         ┃     Ingles I    ┃                ┃                 ┃                ┃                ┃\n");
+    printf("┃  20:00  ┃                 ┃                ┃                 ┃                ┃                ┃\n");
+    printf("┗━━━━━━━━━┻━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┛\n");
+    printf("\n"); 
+    printf("\n"); 
    
     printf("Digite 0 para voltar ao menu principal: \n");
+
+    int operecao;
     scanf("%d", &operecao);
 
     switch (operecao){
@@ -556,4 +583,51 @@ void calendarioIcev(){
         printf("opção invalida! \n");
         break;
     }
+}
+
+void creditosDesenvolvedores(){
+
+    limparTerminal();
+
+    printf("██████╗ ███████╗███████╗███████╗███╗   ██╗██╗   ██╗ ██████╗ ██╗    ██╗   ██╗███████╗██████╗  ██████╗ ██████╗ ███████╗███████╗\n");
+    printf("██╔══██╗██╔════╝██╔════╝██╔════╝████╗  ██║██║   ██║██╔═══██╗██║    ██║   ██║██╔════╝██╔══██╗██╔═══██╗██╔══██╗██╔════╝██╔════╝\n");
+    printf("██║  ██║█████╗  ███████╗█████╗  ██╔██╗ ██║██║   ██║██║   ██║██║    ██║   ██║█████╗  ██║  ██║██║   ██║██████╔╝█████╗  ███████╗\n");
+    printf("██║  ██║██╔══╝  ╚════██║██╔══╝  ██║╚██╗██║╚██╗ ██╔╝██║   ██║██║    ╚██╗ ██╔╝██╔══╝  ██║  ██║██║   ██║██╔══██╗██╔══╝  ╚════██║\n");
+    printf("██████╔╝███████╗███████║███████╗██║ ╚████║ ╚████╔╝ ╚██████╔╝███████╗╚████╔╝ ███████╗██████╔╝╚██████╔╝██║  ██║███████╗███████║\n");
+    printf("╚═════╝ ╚══════╝╚══════╝╚══════╝╚═╝  ╚═══╝  ╚═══╝   ╚═════╝ ╚══════╝ ╚═══╝  ╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝\n");
+    printf("\n");
+
+    printf("                                                                               \n");
+    printf("                _________________                                               \n");     
+    printf("               /                /|                                              \n");
+    printf("              /                / |                                              \n");
+    printf("             /________________/ /|                                              \n");
+    printf("          ###|      ____      |//|                                              \n");
+    printf("         #   |     /   /|     |/.|                                              \n");
+    printf("        #  __|___ /   /.|     |  |_______________                               \n"); 
+    printf("      #  /      /   //||     |  /              /|                   ___         \n");
+    printf("      #  /      /___// ||     | /              / |                 / \ \        \n");
+    printf("      # /______/!   || ||_____|/              /  |                /   \ \       \n");
+    printf("      #| . . .  !   || ||                    /  _________________/     \ \      \n");
+    printf("      #|  . .   !   || //      ________     /  /\________________  {   /  }     \n");
+    printf("      /|   .    !   ||//~~~~~~/   0000/    /  / / ______________  {   /  /      \n");
+    printf("     / |        !   |'/      /9  0000/    /  / / /             / {   /  /       \n");
+    printf("   / #\________!___|/      /9  0000/    /  / / /_____________/___  /  /         \n");
+    printf("   / #     /_____\/        /9  0000/    /  / / /_  /\_____________\/  /         \n");
+    printf("  / #                      ``^^^^^^    /   \ \ . ./ / ____________   /          \n");
+    printf(" +=#==================================/     \ \ ./ / /.  .  .  \ /  /           \n");
+    printf(" |#                                   |      \ \/ / /___________/  /            \n");
+    printf("|#                                    |_______\__/________________/             \n");
+    printf("|                                      |               |  |  / /                \n");
+    printf("|                                      |               |  | / /                 \n");
+    printf("|                                      |       ________|  |/ /________          \n");
+    printf("|                                      |      /_______/    \_________/\         \n");
+    printf("|                                      |     /        /  /           \ )        \n");
+    printf("|                                      |    /OO^^^^^^/  / /^^^^^^^^^OO\)        \n");
+    printf("|                                      |            /  / /                      \n");
+    printf("|                                      |           /  / /                       \n");
+    printf("|                                      |          /___\/                        \n");
+    printf("| Laboratorio do professor chiquinho   |           oo                           \n");
+    printf("|______________________________________|                                        \n");
+    
 }
