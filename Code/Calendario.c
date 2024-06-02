@@ -258,9 +258,13 @@ void deletarLembrete() {
     printf("Lista de lembretes: \n");
     char linha[300];
     int i = 1;
+
     while (fgets(linha, sizeof(linha), arquivo)) {
-        if (strncmp(linha, "Descrição:", 10) == 0) {
-            printf("%d. %s", i, linha + 11); // Pula "Descrição: "
+        if (strncmp(linha, "Data:", 5) == 0) {
+            printf("%d. %s", i, linha); // Mostra a linha da data
+            if (fgets(linha, sizeof(linha), arquivo)) {
+                printf("   %s", linha); // Mostra a linha da descrição
+            }
             i++;
         }
     }
@@ -272,7 +276,8 @@ void deletarLembrete() {
 
     if (opcao < 1 || opcao >= i) {
         printf("Opção inválida! \n");
-        return;
+        limparTerminal();
+        return gerenicarLembretes();
     }
 
     arquivo = fopen("Lembretes.txt", "r");
@@ -283,11 +288,18 @@ void deletarLembrete() {
     }
 
     i = 1;
+    int deletar = 0;
     while (fgets(linha, sizeof(linha), arquivo)) {
-        if (!(strncmp(linha, "Descrição:", 10) == 0 && i == opcao)) {
-            fputs(linha, temp);
-        } else {
+        if (strncmp(linha, "Data:", 5) == 0) {
+            if (i == opcao) {
+                deletar = 1;
+            } else {
+                deletar = 0;
+            }
             i++;
+        }
+        if (!deletar) {
+            fputs(linha, temp);
         }
     }
     fclose(arquivo);
