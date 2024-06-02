@@ -11,6 +11,16 @@
 
 
 FILE *arquivo;
+
+void criarArquivo(){
+    arquivo = fopen("Lembretes.txt", "a");
+    if (arquivo == NULL) {
+    printf("Não foi possível abrir o arquivo.\n");
+    exit(1);
+  }
+  fclose(arquivo);
+}
+
 #define MAXIMO_LEMBRETES 10
 
 struct lembrete{
@@ -22,27 +32,6 @@ struct lembrete{
 struct lembrete lembretes[MAXIMO_LEMBRETES];
 int contagem;
 
-//
-
-static const char *MonthDisplay[] = {
-    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro",
-    "Outubro", "Novembro", "Dezembro"};
-int ano, mes, dia, x, day2;
-signed char c; // entrada do usuario para mudança de calendario
-int mesArray[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-void menuCalendario() {
-    printf("Você selecionou %s %d, %d \n", MonthDisplay[mes - 1], dia, ano);
-    printf("   - Para alternar entre os dias, use (a) para o dia anterior e (d) para o próximo dia. \n");
-    printf("   - Para alternar entre os meses, use (w) para o mês anterior e (s) para o próximo mês.\n\n");
-
-    printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
-    printf("Pressione 2: visualizar lembretes \n");
-    printf("Pressione 3: para voltar \n");
-    // função principal para o calendario
-}
-
-//
 
 // Função de manipulação de terminal
 void limparTerminal();
@@ -57,15 +46,11 @@ void criarLembretes();
 void menuCalendario();
 
 int main(){
-    arquivo = fopen("Lembretes.txt", "a");
-    if (arquivo == NULL) {
-        printf("Não foi possível abrir o arquivo.\n");
-        return 1;
-    }
+    criarArquivo();
     limparTerminal();
     logoCalendario();
     menuPrincipal();
-    fclose(arquivo);
+
     return 0;
 }
 
@@ -119,7 +104,7 @@ void menuPrincipal(){
         break;
     case 3:
         limparTerminal();
-        visualizarLembretes();
+        visualizarLembretes(lembretes);
         break;
     case 4: 
         limparTerminal();
@@ -144,6 +129,12 @@ void menuPrincipal(){
 
 void criarLembretes(){
     
+    arquivo = fopen("usuarios.txt", "a");
+    if (contagem >= MAXIMO_LEMBRETES){
+    printf("Numero maximo de usuarios atingidos! \n");
+    return;
+  }
+
     struct lembrete lembrete;
 
     printf("Digite o dia do lembrete: \n");
@@ -162,7 +153,7 @@ void criarLembretes(){
     fgets(lembrete.descricao, 150, stdin);
 
     fprintf(arquivo,"Data: %02d/%02d/%d \n",lembrete.dia,lembrete.mes,lembrete.ano);
-    fprintf(arquivo,"Descrição:%s \n",lembrete.descricao);
+    fprintf(arquivo,"Descrição: %s \n",lembrete.descricao);
 
     fclose(arquivo);
 
@@ -175,63 +166,55 @@ void criarLembretes(){
 
 }
 
-void numeroLembretes(struct lembrete lembretes[]){
+
+void listarLembretes() {
+    FILE *arquivo = fopen("usuarios.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo! \n");
+        exit(1);
+    }
+    limparTerminal();
+    printf("Lista de lembretes: \n");
+    char linha[300];
+    int i = 1;
+    while (fgets(linha, sizeof(linha), arquivo)) {
+        if (strncmp(linha, "Descricao:", 10) == 0) {
+            printf("%d. %s", i, linha + 11); // Pula "Descricao: "
+            i++;
+        }
+    }
+    fclose(arquivo);
+}
+
+void ListarNumeroLembretes(struct lembrete lembretes[]) {
     int i;
     int numLembretes = 0;
-    for(i = 0; i < MAXIMO_LEMBRETES; i++){
-        if(lembretes[i].dia != 0){ // assumindo que 'dia' é um campo em 'struct lembrete' e que '0' indica um lembrete vazio
+    for (i = 0; i < MAXIMO_LEMBRETES; i++) {
+        if (lembretes[i].dia != 0) { // assumindo que 'dia' é um campo em 'struct lembrete' e que '0' indica um lembrete vazio
             numLembretes++;
         }
     }
-    printf("numero de lembres é: %d \n", numLembretes);
-}    
+    printf("Número de lembretes é: %d \n", numLembretes);
+}
 
-//tem listar por data, e não pode duplicar a mesma data, deve comparar os lembretes e verificar
-//se a data é a mesma, se uma data existir, anexa lembrete na data existente. 
-
-// função para ordenar os lembretes
-
-// int compara(const void *a, const void *b){
-//     struct lembrete *lembreteA = (struct lembrete *)a;
-//     struct lembrete *lembreteB = (struct lembrete *)b;
-//     return lembreteA->dia - lembreteB->dia;
-// }
-
-// void listarLembretes(struct lembrete lembretes[]){
-//     DIR *dir;
-//     struct dirent *ent;
-//     int numLembretes = 0;
-//     if ((dir = opendir ("./")) != NULL) {
-//         while ((ent = readdir (dir)) != NULL) {
-//             sscanf(ent->d_name, "%d", &lembretes[numLembretes].dia);
-//             strcpy(lembretes[numLembretes].nome, ent->d_name);
-//             numLembretes++;
-//         }
-//         closedir (dir);
-//     } else {
-//         perror ("");
-//     }
-//     // qsort(struct lembrete, numLembretes, sizeof(lembrete), compara);
-// }
-
-void visualizarLembretes(){
+void visualizarLembretes(struct lembrete lembretes[]) {
     int op;
     printf("O que deseja visualizar? \n");
-    printf("Pressione 1: visualizar numero de lembretes \n");
+    printf("Pressione 1: visualizar número de lembretes \n");
     printf("Pressione 2: visualizar lista de lembretes \n");
     scanf("%d", &op);
-    switch (op){
+    switch (op) {
     case 1:
-        numeroLembretes(lembretes);
-        printf("Pressione 0 para voltar ao menu principal: \n");    
+        ListarNumeroLembretes(lembretes);
+        printf("Pressione 0 para voltar ao menu principal: \n");
         break;
     case 2:
-        printf("em construção \n");
+        listarLembretes();
         break;
     default:
+        printf("Opção inválida! \n");
         break;
-    }    
-    // listar lembretes
+    }
 }
 
 void menuLembretes() {
@@ -245,16 +228,38 @@ void menuLembretes() {
 
 // inicio da gestão de calendario
 
+static const char *MonthDisplay[] = {
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro",
+    "Outubro", "Novembro", "Dezembro"};
+int ano, mes, dia, DeterminarDia, day2;
+signed char c; // entrada do usuario para mudança de calendario
+int mesArray[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+void menuCalendario() {
+    printf("Você selecionou %s %d, %d \n", MonthDisplay[mes - 1], dia, ano);
+    printf("   - Para alternar entre os dias, use (a) para o dia anterior e (d) para o próximo dia. \n");
+    printf("   - Para alternar entre os meses, use (w) para o mês anterior e (s) para o próximo mês.\n\n");
+
+    printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
+    printf("Pressione 2: visualizar lembretes \n");
+    printf("Pressione 3: para voltar \n");
+    // função principal para o calendario
+}
 
 void GerarCalendario() {
-    // Fonte da linha acima: cadaeit.net
+
+    limparTerminal();
+    system("setterm -bold on"); // cabeçalho em negrito
+    printf("Calendario de Eventos \n");
+    system("setterm -bold off");
+
+
     system("setterm -bold on");                                    // cabeçalho em negrito
     printf("\n         %s    %d \n", MonthDisplay[mes - 1], ano); // cabeçalho
     printf("\nDOM  SEG  TER  QUA  QUI  SEX  SAB\n");
     system("setterm -bold off");
 
-    for (day2 = 1; day2 <= x; day2++) { // day2 e o contador
+    for (day2 = 1; day2 <= DeterminarDia; day2++) { // day2 e o contador
         printf("     ");
     } // inicializa a posição do primeiro dia
 
@@ -265,7 +270,7 @@ void GerarCalendario() {
         } else {
             printf("%2d", day2);
         }
-        if (((day2 + x) % 7) > 0) { // passa para a proxima linha após sábado
+        if (((day2 + DeterminarDia) % 7) > 0) { // passa para a proxima linha após sábado
             printf("   ");
         } else {
             printf("\n ");
@@ -275,10 +280,6 @@ void GerarCalendario() {
 }
 
 void calendario() {
-    limparTerminal();
-    system("setterm -bold on"); // cabeçalho em negrito
-    printf("Calendario de Eventos \n");
-    system("setterm -bold off");
 
     printf("Digite o dia: ");
     scanf("%d", &dia); // entrada do usuario para o dia
@@ -335,14 +336,14 @@ void calendario() {
     }
 
     // Calcula o primeiro dia do mês
-    x = 1;
-    x = (x += mes < 3 ? ano : ano - 2, 23 * mes / 9 + x + 4 + ano / 4 - ano / 100 + ano / 400) % 7;
+    DeterminarDia = 1;
+    DeterminarDia = (DeterminarDia += mes < 3 ? ano : ano - 2, 23 * mes / 9 + DeterminarDia + 4 + ano / 4 - ano / 100 + ano / 400) % 7;
     if ((ano % 4) == 0 && ((ano % 100) != 0 || (ano % 400) == 0)) {
         mesArray[1] = 29;
         if (mes == 1 || mes == 2) {
-            x--;
-            if (x < 0) {
-                x = 6;
+            DeterminarDia--;
+            if (DeterminarDia < 0) {
+                DeterminarDia = 6;
             }
         }
     } else {
