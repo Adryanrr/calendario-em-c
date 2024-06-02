@@ -80,6 +80,9 @@ void menuPrincipal(){
     setlocale(LC_ALL,"Portuguese_Brazil");
     int opMenuPrincipal;
 
+    limparTerminal();
+    logoCalendario();
+
     printf("  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
     printf("  ┃                              MENU PRINCIPAL                               ┃\n");
     printf("  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
@@ -139,6 +142,9 @@ void menuPrincipal(){
 
 
 void criarLembretes() {
+
+    logoCalendario();
+
     if (contagem >= MAXIMO_LEMBRETES) {
         printf("Número máximo de lembretes atingido! \n");
         return;
@@ -183,6 +189,9 @@ void criarLembretes() {
 }
 
 void listarLembretes() {
+
+    logoCalendario();
+
     FILE *arquivo = fopen("Lembretes.txt", "r");
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo! \n");
@@ -225,11 +234,15 @@ void listarLembretes() {
 }
 
 void listarNumeroLembretes() {
+    logoCalendario();
     printf("Número de lembretes é: %d \n", contagem);
 }
 
 // Função para deletar lembrete
 void deletarLembrete() {
+
+    logoCalendario();
+    printf("Menu Remoção de lembrete \n");
     FILE *arquivo = fopen("Lembretes.txt", "r");
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo! \n");
@@ -289,6 +302,9 @@ void deletarLembrete() {
 
 void gerenicarLembretes() {
     int op;
+    logoCalendario();
+    printf("Gerenciador de lembretes: \n");
+    printf("\n");
     printf("O que deseja visualizar? \n");
     printf("Pressione 1: visualizar número de lembretes \n");
     printf("Pressione 2: Deletar um lembrete \n");
@@ -309,7 +325,7 @@ void gerenicarLembretes() {
 
 void menuLembretes() {
     printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
-    printf("Pressione 2: visualizar lembretes \n");
+    printf("Pressione 2: Gerenciador de lembretes \n");
     printf("Pressione 3: para voltar \n");
     
 }
@@ -326,9 +342,12 @@ signed char c; // entrada do usuario para mudança de calendario
 int mesArray[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 void menuCalendario() {
+    printf("\n");
     printf("Você selecionou %s %d, %d \n", MonthDisplay[mes - 1], dia, ano);
+    printf("\n");
     printf("   - Para alternar entre os dias, use (a) para o dia anterior e (d) para o próximo dia. \n");
-    printf("   - Para alternar entre os meses, use (w) para o mês anterior e (s) para o próximo mês.\n\n");
+    printf("   - Para alternar entre os meses, use (w) para o mês anterior e (s) para o próximo mês.\n");
+    printf("\n");
 
     printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
     printf("Pressione 2: visualizar lembretes \n");
@@ -337,11 +356,11 @@ void menuCalendario() {
 }
 
 void GerarCalendario() {
-
+    
     limparTerminal();
     logoCalendario();
     system("setterm -bold on"); // cabeçalho em negrito
-    printf("Calendario de Eventos \n");
+    printf("       Calendario de Eventos      \n");
     system("setterm -bold off");
 
 
@@ -371,6 +390,7 @@ void GerarCalendario() {
 }
 
 void calendario() {
+    logoCalendario();
 
     printf("Digite o dia: ");
     scanf("%d", &dia); // entrada do usuario para o dia
@@ -450,11 +470,12 @@ void calendario() {
         scanf(" %c", &c); // leia o comando do usuario
 
         if (c == '1') {
-            // Chamar função para criar evento
+            limparTerminal();
             criarLembretes();
         } else if (c == '2') {
             // Chamar função para gerenciar evento
             limparTerminal();
+            logoCalendario();
             gerenicarLembretes();
         } else if (c == '3') {
             limparTerminal();
