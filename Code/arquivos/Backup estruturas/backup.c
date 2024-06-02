@@ -133,7 +133,7 @@ void menuPrincipal(){
         limparTerminal();
         saida();
         break;
-      default:
+    default:
         printf("Opção invalida, tente novamente! \n");
         sleep(2);
         logoCalendario();
@@ -209,12 +209,14 @@ void listarLembretes() {
     int i = 1;
 
     while (fgets(linha, sizeof(linha), arquivo)) {
-        if (strncmp(linha, "Descrição:", 10) == 0) {
-            printf("%d. %s", i, linha + 11); // Pula "Descrição: "
+        if (strncmp(linha, "Data:", 5) == 0) {
+            printf("%d. %s", i, linha); // Mostra a linha da data
+            if (fgets(linha, sizeof(linha), arquivo)) {
+                printf("   %s", linha); // Mostra a linha da descrição
+            }
             i++;
         }
     }
-
     fclose(arquivo);
 
     int op = 0;
@@ -271,10 +273,10 @@ void deletarLembrete() {
     fclose(arquivo);
 
     printf("\nDigite o número do lembrete que deseja deletar: ");
-    int opcao;
-    scanf("%d", &opcao);
+    int op;
+    scanf("%d", &op);
 
-    if (opcao < 1 || opcao >= i) {
+    if (op < 1 || op >= i) {
         printf("Opção inválida! \n");
         limparTerminal();
         return gerenicarLembretes();
@@ -291,7 +293,7 @@ void deletarLembrete() {
     int deletar = 0;
     while (fgets(linha, sizeof(linha), arquivo)) {
         if (strncmp(linha, "Data:", 5) == 0) {
-            if (i == opcao) {
+            if (i == op) {
                 deletar = 1;
             } else {
                 deletar = 0;
@@ -322,9 +324,10 @@ void gerenicarLembretes() {
     logoCalendario();
     printf("Gerenciador de lembretes: \n");
     printf("\n");
-    printf("O que deseja visualizar? \n");
+    printf("O que deseja realizar? \n");
     printf("Pressione 1: visualizar número de lembretes \n");
     printf("Pressione 2: Deletar um lembrete \n");
+    printf("Pressione 0: Para voltar ao menu principal \n");
     scanf("%d", &op);
 
     switch (op) {
@@ -334,17 +337,17 @@ void gerenicarLembretes() {
         case 2:
             deletarLembrete();
             break;
+        case 0:
+            menuPrincipal();
+            break;
         default:
+            limparTerminal();
             printf("Opção inválida! \n");
+            printf("Retornando ao meunu principal \n");
+            sleep(2.5);
+            menuPrincipal();
             break;
     }
-}
-
-void menuLembretes() {
-    printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
-    printf("Pressione 2: Gerenciador de lembretes \n");
-    printf("Pressione 3: para voltar \n");
-    
 }
 
 // Final da gestão de lembretes
@@ -623,11 +626,89 @@ void calendarioIcev(){
     }
 }
 
+int obterConfirmacao(const char *mensagem) {
+    int confirmacao;
+    printf("%s (1 para Sim / 0 para Não): ", mensagem);
+    scanf("%d", &confirmacao);
+    return confirmacao;
+}
+
 void creditosDesenvolvedores(){
-    printf("Em construção ! \n");
-    sleep(3);
-    limparTerminal();
-    menuPrincipal();
+
+    printf("██████╗ ███████╗███████╗███████╗███╗   ██╗██╗   ██╗ ██████╗ ██╗    ██╗   ██╗███████╗██████╗  ██████╗ ██████╗ ███████╗███████╗\n");
+    printf("██╔══██╗██╔════╝██╔════╝██╔════╝████╗  ██║██║   ██║██╔═══██╗██║    ██║   ██║██╔════╝██╔══██╗██╔═══██╗██╔══██╗██╔════╝██╔════╝\n");
+    printf("██║  ██║█████╗  ███████╗█████╗  ██╔██╗ ██║██║   ██║██║   ██║██║    ██║   ██║█████╗  ██║  ██║██║   ██║██████╔╝█████╗  ███████╗\n");
+    printf("██║  ██║██╔══╝  ╚════██║██╔══╝  ██║╚██╗██║╚██╗ ██╔╝██║   ██║██║    ╚██╗ ██╔╝██╔══╝  ██║  ██║██║   ██║██╔══██╗██╔══╝  ╚════██║\n");
+    printf("██████╔╝███████╗███████║███████╗██║ ╚████║ ╚████╔╝ ╚██████╔╝███████╗╚████╔╝ ███████╗██████╔╝╚██████╔╝██║  ██║███████╗███████║\n");
+    printf("╚═════╝ ╚══════╝╚══════╝╚══════╝╚═╝  ╚═══╝  ╚═══╝   ╚═════╝ ╚══════╝ ╚═══╝  ╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝\n");
+    printf("\n");
+
+    printf("                                                                                 \n");
+    printf("                _________________                                                 \n");
+    printf("               /                /|                                                \n");
+    printf("              /                / |                                                \n");
+    printf("             /________________/ /|                                                \n");
+    printf("          ###|      ____      |//|                                                \n");
+    printf("         #   |     /   /|     |/.|                                                \n");
+    printf("        #  __|___ /   /.|     |  |_______________                                 \n");
+    printf("      #  /      /   //||     |  /              /|                   ___           \n");
+    printf("      #  /      /___// ||     | /              / |                 / \\ \\        \n");
+    printf("      # /______/!   || ||_____|/              /  |                /   \\ \\       \n");
+    printf("      #| . . .  !   || ||                    /  _________________/     \\ \\      \n");
+    printf("      #|  . .   !   || //      ________     /  /\\________________  {   /  }      \n");
+    printf("      /|   .    !   ||//~~~~~~/   0000/    /  / / ______________  {   /  /        \n");
+    printf("     / |        !   |'/      /9  0000/    /  / / /             / {   /  /         \n");
+    printf("   / #\\________!___|/      /9  0000/    /  / / /_____________/___  /  /          \n");
+    printf("   / #     /_____\\/        /9  0000/    /  / / /_  /\\_____________\\/  /        \n");
+    printf("  / #                      ``^^^^^^    /   \\ \\ . ./ / ____________   /          \n");
+    printf(" +=#==================================/     \\ \\ ./ / /.  .  .  \\ /  /          \n");
+    printf(" |#                                   |      \\ \\/ / /___________/  /            \n");
+    printf("|#                                    |_______\\__/________________/              \n");
+    printf("|                                      |               |  |  / /                  \n");
+    printf("| @adryanrr                            |               |  | / /                   \n");
+    printf("| @MatheusJuK                          |       ________|  |/ /________            \n");
+    printf("| @Whuanderson                         |      /_______/    \\_________/\\         \n");
+    printf("| @AndreNTeixeira                      |     /        /  /           \\ )         \n");
+    printf("|                                      |             / /                          \n");
+    printf("|                                      |            / /                           \n");
+    printf("|                                      |          /___\\                          \n");
+    printf("| Laboratorio do professor chiquinho   |           oo                             \n");
+    printf("|______________________________________|                                          \n");
+
+    printf("\n");
+    
+    int op;
+    while (1) {
+        printf("Escolha uma operação:\n");
+        printf("1. Voltar ao menu principal\n");
+        printf("2. Sair da aplicação\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &op);
+
+        switch (op) {
+            case 1:
+                if (obterConfirmacao("Deseja voltar ao menu principal?")) {
+                    limparTerminal();
+                    menuPrincipal();
+                }
+                break;
+            case 2:
+                if (obterConfirmacao("Deseja sair da aplicação?")) {
+                    limparTerminal();
+                    printf("Saindo da aplicação...\n");
+                    sleep(2);
+                    limparTerminal();
+                    return;
+                }
+                break;
+            default:
+                printf("Operação inválida!\nAguarde 2s!\n");
+                sleep(2);
+                limparTerminal();
+                creditosDesenvolvedores();
+                break;
+        }
+    }
 }
 
 #define LENGTH 50  // comprimento da barra de carregamento
