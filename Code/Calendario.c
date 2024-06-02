@@ -662,6 +662,8 @@ void saida() {
     }
     road[LENGTH] = '\0';  // termina a string
     // Desenha o carro ASCII art na tela
+    printf("Pressione 0 para sair \n\n");
+
     printf(BLUE "                      _____________      ____       ______________________ \n");
     printf("              ________)            \\    /   /      /                      \\ \n");
     printf("     ________/  \\      " RED "RED BULL" RESET BLUE "   /  \\_/   |------/  Obrigado pela visita, \\  \n");
