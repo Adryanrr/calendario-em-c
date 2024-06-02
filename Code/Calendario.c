@@ -133,7 +133,7 @@ void menuPrincipal(){
         limparTerminal();
         saida();
         break;
-      default:
+    default:
         printf("Opção invalida, tente novamente! \n");
         sleep(2);
         logoCalendario();
@@ -271,10 +271,10 @@ void deletarLembrete() {
     fclose(arquivo);
 
     printf("\nDigite o número do lembrete que deseja deletar: ");
-    int opcao;
-    scanf("%d", &opcao);
+    int op;
+    scanf("%d", &op);
 
-    if (opcao < 1 || opcao >= i) {
+    if (op < 1 || op >= i) {
         printf("Opção inválida! \n");
         limparTerminal();
         return gerenicarLembretes();
@@ -291,7 +291,7 @@ void deletarLembrete() {
     int deletar = 0;
     while (fgets(linha, sizeof(linha), arquivo)) {
         if (strncmp(linha, "Data:", 5) == 0) {
-            if (i == opcao) {
+            if (i == op) {
                 deletar = 1;
             } else {
                 deletar = 0;
@@ -322,9 +322,10 @@ void gerenicarLembretes() {
     logoCalendario();
     printf("Gerenciador de lembretes: \n");
     printf("\n");
-    printf("O que deseja visualizar? \n");
+    printf("O que deseja realizar? \n");
     printf("Pressione 1: visualizar número de lembretes \n");
     printf("Pressione 2: Deletar um lembrete \n");
+    printf("Pressione 0: Para voltar ao menu principal \n");
     scanf("%d", &op);
 
     switch (op) {
@@ -334,17 +335,17 @@ void gerenicarLembretes() {
         case 2:
             deletarLembrete();
             break;
+        case 0:
+            menuPrincipal();
+            break;
         default:
+            limparTerminal();
             printf("Opção inválida! \n");
+            printf("Retornando ao meunu principal \n");
+            sleep(2.5);
+            menuPrincipal();
             break;
     }
-}
-
-void menuLembretes() {
-    printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
-    printf("Pressione 2: Gerenciador de lembretes \n");
-    printf("Pressione 3: para voltar \n");
-    
 }
 
 // Final da gestão de lembretes
@@ -628,6 +629,7 @@ void creditosDesenvolvedores(){
     sleep(3);
     limparTerminal();
     menuPrincipal();
+
 }
 
 #define LENGTH 50  // comprimento da barra de carregamento
