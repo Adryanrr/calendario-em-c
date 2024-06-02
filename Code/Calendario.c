@@ -8,6 +8,9 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <sys/ioctl.h>
+#include <unistd.h>
+#include <termios.h>
+#include <fcntl.h>
 
 
 FILE *arquivo;
@@ -37,6 +40,8 @@ int contagem;
 void limparTerminal();
 void menuPrincipal();
 void logoCalendario();
+void saida();
+
 // 
 void creditosDesenvolvedores();
 void gerenicarLembretes();
@@ -126,7 +131,7 @@ void menuPrincipal(){
         break;
     case 0:
         limparTerminal();
-        printf("Obrigado, volte sempre! \n");
+        saida();
         break;
       default:
         printf("Opção invalida, tente novamente! \n");
@@ -607,48 +612,86 @@ void calendarioIcev(){
 }
 
 void creditosDesenvolvedores(){
-
+    printf("Em construção ! \n");
+    sleep(3);
     limparTerminal();
+    menuPrincipal();
+}
 
-    printf("██████╗ ███████╗███████╗███████╗███╗   ██╗██╗   ██╗ ██████╗ ██╗    ██╗   ██╗███████╗██████╗  ██████╗ ██████╗ ███████╗███████╗\n");
-    printf("██╔══██╗██╔════╝██╔════╝██╔════╝████╗  ██║██║   ██║██╔═══██╗██║    ██║   ██║██╔════╝██╔══██╗██╔═══██╗██╔══██╗██╔════╝██╔════╝\n");
-    printf("██║  ██║█████╗  ███████╗█████╗  ██╔██╗ ██║██║   ██║██║   ██║██║    ██║   ██║█████╗  ██║  ██║██║   ██║██████╔╝█████╗  ███████╗\n");
-    printf("██║  ██║██╔══╝  ╚════██║██╔══╝  ██║╚██╗██║╚██╗ ██╔╝██║   ██║██║    ╚██╗ ██╔╝██╔══╝  ██║  ██║██║   ██║██╔══██╗██╔══╝  ╚════██║\n");
-    printf("██████╔╝███████╗███████║███████╗██║ ╚████║ ╚████╔╝ ╚██████╔╝███████╗╚████╔╝ ███████╗██████╔╝╚██████╔╝██║  ██║███████╗███████║\n");
-    printf("╚═════╝ ╚══════╝╚══════╝╚══════╝╚═╝  ╚═══╝  ╚═══╝   ╚═════╝ ╚══════╝ ╚═══╝  ╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝\n");
-    printf("\n");
+#define LENGTH 50  // comprimento da barra de carregamento
+#define PATTERN "_ _ _"  // padrão da estrada
+#define PATTERN_LEN 5  // comprimento do padrão da estrada
 
-    printf("                                                                               \n");
-    printf("                _________________                                               \n");     
-    printf("               /                /|                                              \n");
-    printf("              /                / |                                              \n");
-    printf("             /________________/ /|                                              \n");
-    printf("          ###|      ____      |//|                                              \n");
-    printf("         #   |     /   /|     |/.|                                              \n");
-    printf("        #  __|___ /   /.|     |  |_______________                               \n"); 
-    printf("      #  /      /   //||     |  /              /|                   ___         \n");
-    printf("      #  /      /___// ||     | /              / |                 / \ \        \n");
-    printf("      # /______/!   || ||_____|/              /  |                /   \ \       \n");
-    printf("      #| . . .  !   || ||                    /  _________________/     \ \      \n");
-    printf("      #|  . .   !   || //      ________     /  /\________________  {   /  }     \n");
-    printf("      /|   .    !   ||//~~~~~~/   0000/    /  / / ______________  {   /  /      \n");
-    printf("     / |        !   |'/      /9  0000/    /  / / /             / {   /  /       \n");
-    printf("   / #\________!___|/      /9  0000/    /  / / /_____________/___  /  /         \n");
-    printf("   / #     /_____\/        /9  0000/    /  / / /_  /\_____________\/  /         \n");
-    printf("  / #                      ``^^^^^^    /   \ \ . ./ / ____________   /          \n");
-    printf(" +=#==================================/     \ \ ./ / /.  .  .  \ /  /           \n");
-    printf(" |#                                   |      \ \/ / /___________/  /            \n");
-    printf("|#                                    |_______\__/________________/             \n");
-    printf("|                                      |               |  |  / /                \n");
-    printf("| @adryanrr                            |               |  | / /                 \n");
-    printf("| @MatheusJuK                          |       ________|  |/ /________          \n");
-    printf("| @Whuanderson                         |      /_______/    \_________/\         \n");
-    printf("| @AndreNTeixeira                      |     /        /  /           \ )        \n");
-    printf("|                                      |    /OO^^^^^^/  / /^^^^^^^^^OO\)        \n");
-    printf("|                                      |            /  / /                      \n");
-    printf("|                                      |           /  / /                       \n");
-    printf("|                                      |          /___\/                        \n");
-    printf("| Laboratorio do professor chiquinho   |           oo                           \n");
-    printf("|______________________________________|                                        \n");
+void set_nonblocking_input() {
+    struct termios ttystate;
+    tcgetattr(STDIN_FILENO, &ttystate);
+
+    ttystate.c_lflag &= ~ICANON;
+    ttystate.c_lflag &= ~ECHO;
+    ttystate.c_cc[VMIN] = 1;
+    ttystate.c_cc[VTIME] = 0;
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &ttystate);
+}
+
+void restore_terminal_settings() {
+    struct termios ttystate;
+    tcgetattr(STDIN_FILENO, &ttystate);
+    ttystate.c_lflag |= ICANON;
+    ttystate.c_lflag |= ECHO;
+    tcsetattr(STDIN_FILENO, TCSANOW, &ttystate);
+}
+
+void saida() {
+    char road[LENGTH + 1];  // +1 para o caractere nulo
+    int i;
+    int pattern_position = 0;
+    char ch;
+
+    // Configura entrada não-bloqueante
+    set_nonblocking_input();
+    fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
+
+    // Inicializa a barra de carregamento
+    for (i = 0; i < LENGTH; i++) {
+        road[i] = ' ';
+    }
+    road[LENGTH] = '\0';  // termina a string
+    // Desenha o carro ASCII art na tela
+    printf("         _______                |----------------------------------|     \n");
+    printf("        //  ||\\ \\              |      obrigado, volte sempre!     |    \n");
+    printf("  _____//___||_\\ \\___      ___|                                  |     \n");
+    printf("  )  _          _    \\____|    |  Pressione '0' para pular e sair  |    \n");
+    printf("  |_/ \\________/ \\___|          |----------------------------------|   \n");
+    printf("    \\_/        \\_/                                                     \n");
     
+
+    while (1) {
+        // Verifica se uma tecla foi pressionada
+        if (read(STDIN_FILENO, &ch, 1) > 0) {
+            if (ch == '0') {
+                break;  // sai do loop se '0' for pressionado
+            }
+        }
+
+        // Preenche a estrada com o padrão a partir da posição atual do padrão
+        for (i = 0; i < LENGTH; i++) {
+            road[i] = PATTERN[(pattern_position + i) % PATTERN_LEN];
+        }
+
+        // Imprime a estrada animada
+        printf("\r%s", road);
+        fflush(stdout);
+
+        // Move a posição do padrão
+        pattern_position = (pattern_position + 1) % PATTERN_LEN;
+
+        // Aguarda um pouco antes da próxima atualização
+        usleep(100000);  // 100 milissegundos
+    }
+
+    // Restaura o estado original do terminal
+    restore_terminal_settings();
+
+    printf("\nSaindo...\n");
 }
