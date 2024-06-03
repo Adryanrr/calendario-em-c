@@ -34,6 +34,8 @@ struct lembrete{
 };
 struct lembrete lembretes[MAXIMO_LEMBRETES];
 int contagem;
+int mesArray[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
 
 
 // Função de manipulação de terminal
@@ -144,7 +146,39 @@ void menuPrincipal(){
 
 // Inicio da gestão de lembretes
 
-
+void verificarValidade(){
+    
+    struct lembrete lembrete;
+    while (true){
+        if (lembrete.mes == 4 || lembrete.mes == 6 || lembrete.mes == 9 || lembrete.mes == 11){
+            if (lembrete.dia > 30) {
+                printf("Dia não adequado. \n");
+                printf("Digite o dia: ");
+                scanf("%d", &lembrete.dia); // entrada do usuario para o dia
+                continue;
+            }
+        } else if (lembrete.mes == 2) {
+            if (((lembrete.ano % 4) == 0 && (lembrete.ano % 100 != 0)) || (lembrete.ano % 400 == 0)){
+                mesArray[1] = 29;
+                if (lembrete.dia > 29) {
+                    printf("Dia não adequado. \n");
+                    printf("Digite o dia: ");
+                    scanf("%d", &lembrete.dia); // entrada do usuario para o dia
+                    continue;
+                }
+            } else {
+                if (lembrete.dia > 28){
+                    printf("Dia não adequado. \n");
+                    printf("Digite o dia: ");
+                    scanf("%d", &lembrete.dia); // entrada do usuario para o dia
+                    continue;
+                }
+            }
+            
+        }
+        break;
+    }
+}
 
 void criarLembretes() {
 
@@ -165,14 +199,29 @@ void criarLembretes() {
 
     printf("Digite o dia do lembrete: \n");
     scanf("%d", &lembrete.dia);
+    while (lembrete.dia <1 || lembrete.dia > 31){
+        printf("Dia não adequado. \n");
+        printf("Digite o dia: ");
+        scanf("%d", &lembrete.dia);
+    }
     getchar();
 
     printf("Digite o mês do lembrete: \n");
     scanf("%d", &lembrete.mes);
+    while (lembrete.mes < 1 || lembrete.mes > 12){
+        printf("Mês não adequado. \n");
+        printf("Digite outro mês: ");
+        scanf("%d", &lembrete.mes);    
+    }
     getchar(); 
 
     printf("Digite o ano do lembrete: \n");
     scanf("%d", &lembrete.ano);
+    while (lembrete.ano < 0) {
+        printf("Ano não adequado. \n");
+        printf("Digite o ano: ");
+        scanf("%d", &lembrete.ano);
+    }
     getchar(); 
 
     printf("Digite a descrição do lembrete: \n");
@@ -359,7 +408,6 @@ static const char *MonthDisplay[] = {
     "Outubro", "Novembro", "Dezembro"};
 int ano, mes, dia, DeterminarDia, day2;
 signed char c; // entrada do usuario para mudança de calendario
-int mesArray[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 void menuCalendario() {
     printf("\n");
