@@ -1,56 +1,76 @@
-# Projeto Calendário em C
+# Agenda de Lembretes e Calendário Acadêmico
 
-Este é um projeto desenvolvido para a faculdade que consiste em um calendário com funcionalidades adicionais como visualização de lembretes e calendário acadêmico. O projeto é implementado em C e utiliza funções básicas para interagir com o usuário através do terminal.
+## Descrição
+
+Este projeto é uma aplicação de linha de comando em C que permite aos usuários gerenciar lembretes e visualizar um calendário acadêmico. A aplicação oferece funcionalidades para criar, visualizar e excluir lembretes, bem como um calendário acadêmico detalhado e interativo.
 
 ## Funcionalidades
 
-- **Visualização de Calendário**
-- **Visualização de Lembretes**
-- **Criação de Lembretes**
-- **Visualização de Calendário Acadêmico**
+1. **Gestão de Lembretes**:
+    - **Criar Lembretes**: Permite ao usuário criar novos lembretes.
+    - **Visualizar Lembretes**: Exibe os lembretes existentes.
+    - **Excluir Lembretes**: Permite ao usuário excluir lembretes.
 
-## Estrutura do Código
+2. **Calendário Acadêmico**:
+    - **Visualizar Calendário**: Exibe um calendário interativo que permite navegação entre dias e meses.
+    - **Calendário Acadêmico da Turma ADA**: Exibe o calendário acadêmico específico da turma de Engenharia de Software.
 
-### Arquivos
+3. **Outras Funcionalidades**:
+    - **Créditos dos Desenvolvedores**: Exibe os créditos dos desenvolvedores do projeto.
+    - **Saída Animada**: Exibe uma animação de saída com um carro ASCII art.
 
-- `main.c`: Contém todas as funções necessárias para o funcionamento do calendário.
+## Estrutura do Projeto
 
-## Como Compilar e Executar
+- `main.c`: Arquivo principal que contém a lógica de inicialização e o loop principal da aplicação.
+- `funcoes.h`: Cabeçalhos das funções auxiliares.
+- `funcoes.c`: Implementações das funções auxiliares.
+- `logo.h`: Cabeçalhos das funções que desenham os logotipos e animações.
 
-1. **Compilar o código**: Use um compilador C como `gcc`.
-    ```sh
-    gcc main.c -o calendario
+## Como Executar
+
+1. Clone este repositório:
+    ```bash
+    git clone <URL_do_repositório>
     ```
-2. **Executar o programa**:
-    ```sh
-    ./calendario
+
+2. Navegue até o diretório do projeto:
+    ```bash
+    cd <nome_do_diretório>
     ```
 
-## Menu Principal
+3. Compile o código:
+    ```bash
+    gcc main.c funcoes.c -o agenda
+    ```
 
-Ao iniciar o programa, o usuário verá o seguinte menu:
+4. Execute a aplicação:
+    ```bash
+    ./agenda
+    ```
 
-```
-+===================================================================+
-|         1 - Calendario              3 - Calendario Academico      |
-+===================================================================+
-|    2 - Visualizar Lembretes                 4 - Exit              |
-+===================================================================+
-Digite Qual opção você deseja acessar: 
-```
+## Uso
 
-### Opções do Menu
+Após executar a aplicação, o usuário será apresentado com um menu principal com as seguintes opções:
 
-- **1 - Calendário**: Direciona para a visualização do calendário.
-- **2 - Visualizar Lembretes**: Direciona para a seção de visualização de lembretes (em construção).
-- **3 - Calendário Acadêmico**: Mostra a grade horária do calendário acadêmico.
-- **4 - Sair**: Encerra o programa.
+1. **Lembretes**:
+    - Criar, visualizar e excluir lembretes.
 
+2. **Calendário**:
+    - Visualizar e navegar no calendário.
+    - Acessar o calendário acadêmico da turma ADA.
 
-## Observações
+3. **Créditos dos Desenvolvedores**:
+    - Exibir os créditos dos desenvolvedores do projeto.
 
-- Algumas funções estão marcadas como "Em construção" e serão desenvolvidas futuramente.
-- O programa está preparado para ser expandido com novas funcionalidades conforme necessário.
+4. **Sair**:
+    - Exibir a animação de saída e encerrar a aplicação.
+
+### Navegação no Calendário
+
+- `a`: Dia anterior
+- `d`: Próximo dia
+- `w`: Mês anterior
+- `s`: Próximo mês
 
 ## Desenvolvedores
 
@@ -62,3 +82,9 @@ Digite Qual opção você deseja acessar:
     <td align="center"><a href="https://github.com/AndreNTeixeira"><img src="https://github.com/AndreNTeixeira.png" width="100px;" alt="Foto do Andre Texeira"/><br /><sub><b>Andre Texeira</b></sub></a></td>
   </tr>
 </table>
+
+## Licença
+
+Este projeto está licenciado sob a [MIT License](LICENSE).
+
+---
