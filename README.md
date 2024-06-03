@@ -26,10 +26,6 @@ Este projeto é uma aplicação de linha de comando em C que permite aos usuári
 - `funcoes.c`: Implementações das funções auxiliares.
 - `logo.h`: Cabeçalhos das funções que desenham os logotipos e animações.
 
-## Uso
-
-Após executar a aplicação, o usuário será apresentado com um menu principal com as seguintes opções:
-
 1. **Lembretes**:
     - Criar, visualizar e excluir lembretes.
 
