@@ -26,28 +26,6 @@ Este projeto é uma aplicação de linha de comando em C que permite aos usuári
 - `funcoes.c`: Implementações das funções auxiliares.
 - `logo.h`: Cabeçalhos das funções que desenham os logotipos e animações.
 
-## Como Executar
-
-1. Clone este repositório:
-    ```bash
-    git clone <URL_do_repositório>
-    ```
-
-2. Navegue até o diretório do projeto:
-    ```bash
-    cd <nome_do_diretório>
-    ```
-
-3. Compile o código:
-    ```bash
-    gcc main.c funcoes.c -o agenda
-    ```
-
-4. Execute a aplicação:
-    ```bash
-    ./agenda
-    ```
-
 ## Uso
 
 Após executar a aplicação, o usuário será apresentado com um menu principal com as seguintes opções:
