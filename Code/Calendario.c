@@ -543,7 +543,6 @@ void calendario() {
         } else if (c == '2') {
             // Chamar função para gerenciar evento
             limparTerminal();
-            logoCalendario();
             gerenicarLembretes();
         } else if (c == '3') {
             limparTerminal();
