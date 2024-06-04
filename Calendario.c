@@ -32,11 +32,10 @@ struct lembrete{
     int mes;       
     int dia;          
 };
+
 struct lembrete lembretes[MAXIMO_LEMBRETES];
 int contagem;
 int mesArray[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-
 
 // Função de manipulação de terminal
 void limparTerminal();
@@ -107,7 +106,7 @@ void menuPrincipal(){
     printf("  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
     printf("\n");                                                          
 
-    printf("Digite Qual opção você deseja acessar: \n");
+    printf("Digite Qual opção você deseja acessar: ");
     scanf("%d", &opMenuPrincipal);
 
     switch (opMenuPrincipal){
@@ -374,8 +373,9 @@ void gerenicarLembretes() {
     printf("Gerenciador de lembretes: \n");
     printf("\n");
     printf("O que deseja realizar? \n");
-    printf("Pressione 1: visualizar número de lembretes \n");
-    printf("Pressione 2: Deletar um lembrete \n");
+    printf("Pressione 1: visualizar os lembretes \n");
+    printf("Pressione 2: visualizar número de lembretes \n");
+    printf("Pressione 3: Deletar um lembrete \n");
     printf("Pressione 0: Para voltar ao menu principal \n");
     scanf("%d", &op);
 
@@ -383,7 +383,10 @@ void gerenicarLembretes() {
         case 1:
             listarLembretes();
             break;
-        case 2:
+        case 2: 
+            listarNumeroLembretes();
+            break;    
+        case 3:
             deletarLembrete();
             break;
         case 0:
@@ -413,13 +416,18 @@ void menuCalendario() {
     printf("\n");
     printf("Você selecionou %s %d, %d \n", MonthDisplay[mes - 1], dia, ano);
     printf("\n");
-    printf("   - Para alternar entre os dias, use (a) para o dia anterior e (d) para o próximo dia. \n");
-    printf("   - Para alternar entre os meses, use (w) para o mês anterior e (s) para o próximo mês.\n");
+    printf("Navegação: \n");
+    printf("- Use (a) para o dia anterior e (d) para o próximo dia. \n");
+    printf("- Use (w) para o mês anterior e (s) para o próximo mês.\n");
     printf("\n");
 
     printf("Pressione 1: criar lembretes \n"); // direcionar para a função de criar lembrete
-    printf("Pressione 2: visualizar lembretes \n");
+    printf("Pressione 2: visualizar numero de lembretes \n");
     printf("Pressione 3: para voltar \n");
+    printf("\n");
+
+    printf("Selecionou: ");
+    printf("\e[?25l");
     // função principal para o calendario
 }
 
@@ -428,9 +436,8 @@ void GerarCalendario() {
     limparTerminal();
     logoCalendario();
     system("setterm -bold on"); // cabeçalho em negrito
-    printf("       Calendario de Eventos      \n");
+    printf("            Calendario            \n");
     system("setterm -bold off");
-
 
     system("setterm -bold on");                                    // cabeçalho em negrito
     printf("\n         %s    %d \n", MonthDisplay[mes - 1], ano); // cabeçalho
@@ -541,9 +548,9 @@ void calendario() {
             limparTerminal();
             criarLembretes();
         } else if (c == '2') {
-            // Chamar função para gerenciar evento
+            // Chamar função para gerenciar lembrete
             limparTerminal();
-            gerenicarLembretes();
+            listarNumeroLembretes();
         } else if (c == '3') {
             limparTerminal();
             logoCalendario();
@@ -623,8 +630,6 @@ void calendario() {
 // Final da gestão de calendario
 
 void calendarioIcev(){
- 
-    
 
     printf("                                ██╗ ██████╗███████╗██╗   ██╗ \n");
     printf("                                ██║██╔════╝██╔════╝██║   ██║ \n");
@@ -673,13 +678,6 @@ void calendarioIcev(){
     }
 }
 
-int obterConfirmacao(const char *mensagem) {
-    int confirmacao;
-    printf("%s (1 para Sim / 0 para Não): ", mensagem);
-    scanf("%d", &confirmacao);
-    return confirmacao;
-}
-
 void creditosDesenvolvedores(){
 
     printf("██████╗ ███████╗███████╗███████╗███╗   ██╗██╗   ██╗ ██████╗ ██╗    ██╗   ██╗███████╗██████╗  ██████╗ ██████╗ ███████╗███████╗\n");
@@ -690,7 +688,7 @@ void creditosDesenvolvedores(){
     printf("╚═════╝ ╚══════╝╚══════╝╚══════╝╚═╝  ╚═══╝  ╚═══╝   ╚═════╝ ╚══════╝ ╚═══╝  ╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝\n");
     printf("\n");
 
-    printf("                                                                                 \n");
+    printf(" Laboratorio do professor chiquinho                                               \n");
     printf("                _________________                                                 \n");
     printf("               /                /|                                                \n");
     printf("              /                / |                                                \n");
@@ -719,7 +717,7 @@ void creditosDesenvolvedores(){
     printf("|                                      |             / /                          \n");
     printf("|                                      |            / /                           \n");
     printf("|                                      |          /___\\                          \n");
-    printf("| Laboratorio do professor chiquinho   |           oo                             \n");
+    printf("|                                      |           oo                             \n");
     printf("|______________________________________|                                          \n");
 
     printf("\n");
@@ -734,13 +732,13 @@ void creditosDesenvolvedores(){
 
         switch (op) {
             case 1:
-                if (obterConfirmacao("Deseja voltar ao menu principal?")) {
+                if ("Deseja voltar ao menu principal?") {
                     limparTerminal();
                     menuPrincipal();
                 }
                 break;
             case 2:
-                if (obterConfirmacao("Deseja sair da aplicação?")) {
+                if ("Deseja sair da aplicação?") {
                     limparTerminal();
                     printf("Saindo da aplicação...\n");
                     sleep(2);
@@ -758,85 +756,7 @@ void creditosDesenvolvedores(){
     }
 }
 
-#define LENGTH 50  // comprimento da barra de carregamento
-#define PATTERN "_ _ _"  // padrão da estrada
-#define PATTERN_LEN 5  // comprimento do padrão da estrada
-
-#define BLUE "\x1B[34m"
-#define RED "\x1B[31m"
-#define RESET "\x1B[0m"
-
-void set_nonblocking_input() {
-    struct termios ttystate;
-    tcgetattr(STDIN_FILENO, &ttystate);
-
-    ttystate.c_lflag &= ~ICANON;
-    ttystate.c_lflag &= ~ECHO;
-    ttystate.c_cc[VMIN] = 1;
-    ttystate.c_cc[VTIME] = 0;
-
-    tcsetattr(STDIN_FILENO, TCSANOW, &ttystate);
-}
-
-void restore_terminal_settings() {
-    struct termios ttystate;
-    tcgetattr(STDIN_FILENO, &ttystate);
-    ttystate.c_lflag |= ICANON;
-    ttystate.c_lflag |= ECHO;
-    tcsetattr(STDIN_FILENO, TCSANOW, &ttystate);
-}
-
 void saida() {
-    char road[LENGTH + 1];  // +1 para o caractere nulo
-    int i;
-    int pattern_position = 0;
-    char ch;
-
-    // Configura entrada não-bloqueante
-    set_nonblocking_input();
-    fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
-
-    // Inicializa a barra de carregamento
-    for (i = 0; i < LENGTH; i++) {
-        road[i] = ' ';
-    }
-    road[LENGTH] = '\0';  // termina a string
-    // Desenha o carro ASCII art na tela
-    printf("Pressione 0 para sair \n\n");
-
-    printf(BLUE "                      _____________      ____       ______________________ \n");
-    printf("              ________)            \\    /   /      /                      \\ \n");
-    printf("     ________/  \\      " RED "RED BULL" RESET BLUE "   /  \\_/   |------/  Obrigado pela visita, \\  \n");
-    printf("____/_______| () |_______________| () |____|      \\    Volte Sempre!       /    \n");
-    printf("|__ |        \\__/                 \\__/             \\______________________/     \n" RESET);
-    
-
-    while (1) {
-        // Verifica se uma tecla foi pressionada
-        if (read(STDIN_FILENO, &ch, 1) > 0) {
-            if (ch == '0') {
-                break;  // sai do loop se '0' for pressionado
-            }
-        }
-
-        // Preenche a estrada com o padrão a partir da posição atual do padrão
-        for (i = 0; i < LENGTH; i++) {
-            road[i] = PATTERN[(pattern_position + i) % PATTERN_LEN];
-        }
-
-        // Imprime a estrada animada
-        printf("\r%s", road);
-        fflush(stdout);
-
-        // Move a posição do padrão
-        pattern_position = (pattern_position + 1) % PATTERN_LEN;
-
-        // Aguarda um pouco antes da próxima atualização
-        usleep(100000);  // 100 milissegundos
-    }
-
-    // Restaura o estado original do terminal
-    restore_terminal_settings();
-
-    printf("\nSaindo...\n");
+    printf("\nObrigado! \n");
+    return;
 }

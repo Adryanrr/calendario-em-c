@@ -1,5 +1,12 @@
 # Agenda de Lembretes e Calendário Acadêmico
 
+
+<div>
+  <img  src="https://github.com/Adryanrr/Adryanrr/assets/153025714/7326ff4c-d1a7-40ad-9081-c6adfef5c6d7"/>
+</div>
+
+
+
 ## Descrição
 
 Este projeto é uma aplicação de linha de comando em C que permite aos usuários gerenciar lembretes e visualizar um calendário acadêmico. A aplicação oferece funcionalidades para criar, visualizar e excluir lembretes, bem como um calendário acadêmico detalhado e interativo.
@@ -7,24 +14,15 @@ Este projeto é uma aplicação de linha de comando em C que permite aos usuári
 ## Funcionalidades
 
 1. **Gestão de Lembretes**:
-    - **Criar Lembretes**: Permite ao usuário criar novos lembretes.
+    - **Criar Lembretes**: Permite ao usuário criar novos lembretes e armazenar em um arquivo txt.
     - **Visualizar Lembretes**: Exibe os lembretes existentes.
-    - **Excluir Lembretes**: Permite ao usuário excluir lembretes.
+    - **Excluir Lembretes**: Permite ao usuário excluir lembretes do arquivo txt.
 
 2. **Calendário Acadêmico**:
     - **Visualizar Calendário**: Exibe um calendário interativo que permite navegação entre dias e meses.
     - **Calendário Acadêmico da Turma ADA**: Exibe o calendário acadêmico específico da turma de Engenharia de Software.
 
-3. **Outras Funcionalidades**:
-    - **Créditos dos Desenvolvedores**: Exibe os créditos dos desenvolvedores do projeto.
-    - **Saída Animada**: Exibe uma animação de saída com um carro ASCII art.
-
 ## Estrutura do Projeto
-
-- `main.c`: Arquivo principal que contém a lógica de inicialização e o loop principal da aplicação.
-- `funcoes.h`: Cabeçalhos das funções auxiliares.
-- `funcoes.c`: Implementações das funções auxiliares.
-- `logo.h`: Cabeçalhos das funções que desenham os logotipos e animações.
 
 1. **Lembretes**:
     - Criar, visualizar e excluir lembretes.
@@ -33,13 +31,13 @@ Este projeto é uma aplicação de linha de comando em C que permite aos usuári
     - Visualizar e navegar no calendário.
     - Acessar o calendário acadêmico da turma ADA.
 
-3. **Créditos dos Desenvolvedores**:
-    - Exibir os créditos dos desenvolvedores do projeto.
-
-4. **Sair**:
-    - Exibir a animação de saída e encerrar a aplicação.
-
 ### Navegação no Calendário
+
+<div>
+  <img  src="https://github.com/Adryanrr/Adryanrr/assets/153025714/05062a43-9009-4bfb-9913-bd1d079147a9"/>
+</div>
+
+    
 
 - `a`: Dia anterior
 - `d`: Próximo dia
