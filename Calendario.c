@@ -12,7 +12,6 @@
 #include <termios.h>
 #include <fcntl.h>
 
-
 FILE *arquivo;
 
 void criarArquivo(){
@@ -42,6 +41,7 @@ void limparTerminal();
 void menuPrincipal();
 void logoCalendario();
 void saida();
+void opcao();
 
 // 
 void creditosDesenvolvedores();
@@ -241,6 +241,28 @@ void criarLembretes() {
     menuPrincipal();
 }
 
+void opcao(){
+    int op = 0;
+    printf("\nPressione 1 para voltar ao menu principal \n");
+    printf("Pressione 2 para criar um lembrete \n");
+    scanf("%d", &op);
+    getchar(); // Consumir o '\n' deixado por scanf
+
+    switch (op) {
+        case 1:
+            limparTerminal();
+            menuPrincipal();
+            break;
+        case 2:
+            limparTerminal();
+            criarLembretes();
+            break;
+        default:
+            printf("Operação inválida \n");
+            break;
+    }
+}
+
 void listarLembretes() {
 
     logoCalendario();
@@ -267,30 +289,14 @@ void listarLembretes() {
     }
     fclose(arquivo);
 
-    int op = 0;
-    printf("\nPressione 1 para voltar ao menu principal \n");
-    printf("Pressione 2 para criar um lembrete \n");
-    scanf("%d", &op);
-    getchar(); // Consumir o '\n' deixado por scanf
-
-    switch (op) {
-        case 1:
-            limparTerminal();
-            menuPrincipal();
-            break;
-        case 2:
-            limparTerminal();
-            criarLembretes();
-            break;
-        default:
-            printf("Operação inválida \n");
-            break;
-    }
+    opcao();
 }
 
 void listarNumeroLembretes() {
+    limparTerminal();
     logoCalendario();
-    printf("Número de lembretes é: %d \n", contagem);
+    printf("Número de lembretes criados é: %d \n", contagem);
+    opcao();
 }
 
 // Função para deletar lembrete
@@ -758,5 +764,6 @@ void creditosDesenvolvedores(){
 
 void saida() {
     printf("\nObrigado! \n");
-    return;
+    sleep(2);
+    limparTerminal();
 }
